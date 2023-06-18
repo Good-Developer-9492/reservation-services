@@ -1,0 +1,12 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "userId": "user02",
+  "userPw": "user123456789",
+  "name": "user name",
+  "age": 18,
+  "email": "user@email.com",
+  "phone": "01083862997",
+  "role": "BUSINESS"
+}
