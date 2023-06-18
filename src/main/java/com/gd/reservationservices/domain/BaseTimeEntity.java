@@ -21,11 +21,4 @@ public abstract class BaseTimeEntity {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    private LocalDateTime deletedAt;
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
 }

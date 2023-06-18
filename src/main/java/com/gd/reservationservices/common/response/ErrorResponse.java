@@ -1,7 +1,7 @@
-package com.gd.reservationservices.presentation.response;
+package com.gd.reservationservices.common.response;
 
 
-import com.gd.reservationservices.application.exception.ErrorCodeException;
+import com.gd.reservationservices.common.exception.ErrorCodeException;
 
 public class ErrorResponse {
     private final Meta meta;

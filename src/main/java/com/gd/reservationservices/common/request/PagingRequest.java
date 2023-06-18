@@ -1,4 +1,4 @@
-package com.gd.reservationservices.presentation.request;
+package com.gd.reservationservices.common.request;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.gd.reservationservices.presentation.response;
+package com.gd.reservationservices.common.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
