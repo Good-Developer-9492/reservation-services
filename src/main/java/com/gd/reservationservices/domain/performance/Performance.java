@@ -41,6 +41,9 @@ public class Performance extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private FilmRating filmRating;
 
+    @Column(nullable = false)
+    private int price;
+
     @Column
     private LocalDateTime canceledAt;
 
@@ -59,6 +62,7 @@ public class Performance extends BaseTimeEntity {
                        String content,
                        String acting,
                        FilmRating filmRating,
+                       int price,
                        LocalDateTime canceledAt,
                        String cancelReason) {
         this.place = place;
@@ -70,6 +74,7 @@ public class Performance extends BaseTimeEntity {
         this.content = content;
         this.acting = acting;
         this.filmRating = filmRating;
+        this.price = price;
         this.canceledAt = canceledAt;
         this.cancelReason = cancelReason;
     }
