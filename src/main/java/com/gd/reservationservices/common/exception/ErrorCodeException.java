@@ -1,4 +1,4 @@
-package com.gd.reservationservices.application.exception;
+package com.gd.reservationservices.common.exception;
 
 public abstract class ErrorCodeException extends RuntimeException {
     private final ErrorCode errorCode;
