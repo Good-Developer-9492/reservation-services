@@ -1,11 +1,11 @@
-package com.gd.reservationservices.presentation.coupon;
+package com.gd.reservationservices.presentation.payment;
 
-import com.gd.reservationservices.application.coupon.BusinessCouponService;
+import com.gd.reservationservices.application.payment.CouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/business/coupons")
 @RequiredArgsConstructor
 public class BusinessCouponController {
-    private final BusinessCouponService businessCouponService;
+    private final CouponService couponService;
 }

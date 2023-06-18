@@ -1,4 +1,4 @@
-package com.gd.reservationservices.infrastructure.coupon.custom;
+package com.gd.reservationservices.infrastructure.payment.custom;
 
 import com.gd.reservationservices.infrastructure.user.custom.UserRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
