@@ -1,0 +1,10 @@
+POST http://localhost:8080/business/coupons
+Content-Type: application/json
+
+{
+  "performanceId": "1",
+  "type": "PERCENT",
+  "value": "10",
+  "expiredAt": "2022-06-18",
+  "amount": 1000
+}
