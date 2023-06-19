@@ -35,4 +35,10 @@ public class User extends BaseTimeEntity {
 
     protected User() {
     }
+
+    public void correctionOfInformation(String userPw, String name, int age) {
+        this.userPw = userPw;
+        this.name = name;
+        this.agw = age;
+    }
 }

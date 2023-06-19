@@ -1,0 +1,9 @@
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "1",
+  "userPw": "user123456789",
+  "name": "change name",
+  "age": 19
+}

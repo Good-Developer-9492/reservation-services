@@ -1,5 +1,6 @@
 package com.gd.reservationservices.common.advice;
 
+import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.common.exception.ErrorCodeException;
 import com.gd.reservationservices.common.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -13,5 +14,13 @@ public class ErrorHandlingAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse unknownError(RuntimeException e) {
         return new ErrorResponse("internal-server-error", e.getMessage());
+    }
+
+    @ExceptionHandler({
+            UserNotFoundException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequest(ErrorCodeException e) {
+        return new ErrorResponse(e);
     }
 }
