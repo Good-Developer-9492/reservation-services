@@ -1,0 +1,7 @@
+### GET request find user success
+GET http://localhost:8080/users/1
+Accept: application/json
+
+### GET request find user not found
+GET http://localhost:8080/users/9999999999
+Accept: application/json
