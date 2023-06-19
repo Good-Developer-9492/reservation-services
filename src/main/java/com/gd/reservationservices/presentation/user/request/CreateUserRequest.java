@@ -9,6 +9,6 @@ public record CreateUserRequest(
     int age,
     String email,
     String phone,
-    Role role
+    String role
 ) {
 }

@@ -9,6 +9,6 @@ public record CreateUser(
     int age,
     String email,
     String phone,
-    Role role
+    String role
 ) {
 }

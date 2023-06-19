@@ -1,6 +1,7 @@
 package com.gd.reservationservices.application.user;
 
 import com.gd.reservationservices.application.user.command.CreateUser;
+import com.gd.reservationservices.domain.user.Role;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class UserService {
                 createUser.age(),
                 createUser.email(),
                 createUser.phone(),
-                createUser.role()
+                Role.valueOf(createUser.role())
             ));
     }
 }
