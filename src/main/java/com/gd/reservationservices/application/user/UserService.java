@@ -4,6 +4,7 @@ import com.gd.reservationservices.application.user.dto.SearchUser;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
+import com.gd.reservationservices.infrastructure.user.value.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +17,15 @@ public class UserService {
 
     public SearchUser searchUser(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(UserNotFoundException::new);
 
         return new SearchUser(
-                user.getUserId(),
-                user.getName(),
-                user.getAgw(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getRole()
+            user.getUserId(),
+            user.getName(),
+            user.getAgw(),
+            user.getEmail(),
+            user.getPhone(),
+            Role.valueOf(user.getRole().toString())
         );
     }
 }

@@ -19,13 +19,13 @@ public class UserController {
         SearchUser searchUser = userService.searchUser(id);
 
         SearchUserResponse searchUserResponse =
-                new SearchUserResponse(
-                        searchUser.userId(),
-                        searchUser.name(),
-                        searchUser.age(),
-                        searchUser.email(),
-                        searchUser.phone(),
-                        searchUser.role());
+            new SearchUserResponse(
+                searchUser.userId(),
+                searchUser.name(),
+                searchUser.age(),
+                searchUser.email(),
+                searchUser.phone(),
+                searchUser.role());
 
         return new SingleResponse.Ok<>(searchUserResponse);
     }
