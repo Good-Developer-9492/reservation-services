@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import static com.gd.reservationservices.domain.performance.QPerformance.performance;
 
-public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCustom{
+public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     public PerformanceRepositoryCustomImpl(EntityManager entityManager) {
@@ -17,14 +17,14 @@ public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCus
     @Override
     public boolean exists(Long placeId, LocalDateTime startAt, LocalDateTime endAt) {
         Integer fetchOne = queryFactory
-                .selectOne()
-                .from(performance)
-                .where(
-                        performance.place.id.eq(placeId),
-                        performance.startAt.between(startAt, endAt),
-                        performance.endAt.between(startAt, endAt)
-                )
-                .fetchFirst();
+            .selectOne()
+            .from(performance)
+            .where(
+                performance.place.id.eq(placeId),
+                performance.startAt.between(startAt, endAt)
+                    .or(performance.endAt.between(startAt, endAt))
+            )
+            .fetchFirst();
         return fetchOne != null;
     }
 }

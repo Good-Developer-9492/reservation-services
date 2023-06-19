@@ -22,47 +22,46 @@ public class PerformanceService {
 
     @Transactional
     public CreatePerformance create(CreatePerformanceCommend createPerformanceCommend) {
-        //같은 시간 장소에 등록된 공여니 있으면 exception
         if (performanceRepository.exists(
-                createPerformanceCommend.placeId(),
-                createPerformanceCommend.startAt(),
-                createPerformanceCommend.endAt())
+            createPerformanceCommend.placeId(),
+            createPerformanceCommend.startAt(),
+            createPerformanceCommend.endAt())
         ) {
             throw new IllegalArgumentException("해당 시간에 공연을 등록할 수 없습니다.");
         }
 
         Place place = placeRepository.findById(createPerformanceCommend.placeId())
-                .orElseThrow(() -> new IllegalArgumentException("공연장 정보가 존재하지 않습니다."));
+            .orElseThrow(() -> new IllegalArgumentException("공연장 정보가 존재하지 않습니다."));
 
         Performance newPerformance =
-                new Performance(
-                        place,
-                        Performance.Category.valueOf(createPerformanceCommend.category()),
-                        createPerformanceCommend.startAt(),
-                        createPerformanceCommend.endAt(),
-                        createPerformanceCommend.startReservationAt(),
-                        createPerformanceCommend.endReservationAt(),
-                        createPerformanceCommend.title(),
-                        createPerformanceCommend.content(),
-                        createPerformanceCommend.acting(),
-                        Performance.FilmRating.valueOf(createPerformanceCommend.filmRating())
-                );
+            new Performance(
+                place,
+                Performance.Category.valueOf(createPerformanceCommend.category()),
+                createPerformanceCommend.startAt(),
+                createPerformanceCommend.endAt(),
+                createPerformanceCommend.startReservationAt(),
+                createPerformanceCommend.endReservationAt(),
+                createPerformanceCommend.title(),
+                createPerformanceCommend.content(),
+                createPerformanceCommend.acting(),
+                Performance.FilmRating.valueOf(createPerformanceCommend.filmRating())
+            );
 
         performanceRepository.save(newPerformance);
 
         return new CreatePerformance(
-                new PerformancePlace(place.getName(), place.getLocation()),
-                newPerformance.getStartAt(),
-                newPerformance.getEndAt(),
-                newPerformance.getStartReservationAt(),
-                newPerformance.getEndReservationAt(),
-                Category.valueOf(newPerformance.getCategory().toString()),
-                newPerformance.getTitle(),
-                newPerformance.getContent(),
-                newPerformance.getActing(),
-                FilmRating.valueOf(newPerformance.getFilmRating().toString()),
-                newPerformance.getCreatedAt(),
-                newPerformance.getUpdatedAt()
+            new PerformancePlace(place.getName(), place.getLocation()),
+            newPerformance.getStartAt(),
+            newPerformance.getEndAt(),
+            newPerformance.getStartReservationAt(),
+            newPerformance.getEndReservationAt(),
+            Category.valueOf(newPerformance.getCategory().toString()),
+            newPerformance.getTitle(),
+            newPerformance.getContent(),
+            newPerformance.getActing(),
+            FilmRating.valueOf(newPerformance.getFilmRating().toString()),
+            newPerformance.getCreatedAt(),
+            newPerformance.getUpdatedAt()
         );
     }
 }

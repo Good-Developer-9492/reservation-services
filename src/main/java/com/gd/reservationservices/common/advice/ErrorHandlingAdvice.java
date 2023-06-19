@@ -14,4 +14,12 @@ public class ErrorHandlingAdvice {
     public ErrorResponse unknownError(RuntimeException e) {
         return new ErrorResponse("internal-server-error", e.getMessage());
     }
+
+    @ExceptionHandler({
+        IllegalArgumentException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequest(IllegalArgumentException e) {
+        return new ErrorResponse("bad request", e.getMessage());
+    }
 }
