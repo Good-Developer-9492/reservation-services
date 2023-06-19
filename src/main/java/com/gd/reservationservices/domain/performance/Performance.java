@@ -2,10 +2,12 @@ package com.gd.reservationservices.domain.performance;
 
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class Performance extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +52,33 @@ public class Performance extends BaseTimeEntity {
     @Column
     private String cancelReason;
 
+    public Performance(Place place,
+                       Category category,
+                       LocalDateTime startAt,
+                       LocalDateTime endAt,
+                       LocalDateTime startReservationAt,
+                       LocalDateTime endReservationAt,
+                       String title,
+                       String content,
+                       String acting,
+                       FilmRating filmRating
+    ) {
+        this(
+                place,
+                category,
+                startAt,
+                endAt,
+                startReservationAt,
+                endReservationAt,
+                title,
+                content,
+                acting,
+                filmRating,
+                null,
+                null
+        );
+    }
+
     protected Performance() {
     }
 
@@ -64,7 +93,8 @@ public class Performance extends BaseTimeEntity {
                        String acting,
                        FilmRating filmRating,
                        LocalDateTime canceledAt,
-                       String cancelReason) {
+                       String cancelReason
+    ) {
         this.place = place;
         this.category = category;
         this.startAt = startAt;
