@@ -23,4 +23,12 @@ public class ErrorHandlingAdvice {
     public ErrorResponse notFound(ErrorCodeException e) {
         return new ErrorResponse(e);
     }
+
+    @ExceptionHandler({
+        IllegalArgumentException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequest(IllegalArgumentException e) {
+        return new ErrorResponse("bad request", e.getMessage());
+    }
 }
