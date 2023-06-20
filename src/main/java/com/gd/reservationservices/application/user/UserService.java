@@ -19,13 +19,6 @@ public class UserService {
         User user = userRepository.findById(id)
             .orElseThrow(UserNotFoundException::new);
 
-        return new SearchUser(
-            user.getUserId(),
-            user.getName(),
-            user.getAgw(),
-            user.getEmail(),
-            user.getPhone(),
-            Role.valueOf(user.getRole().toString())
-        );
+        return new SearchUser(user);
     }
 }
