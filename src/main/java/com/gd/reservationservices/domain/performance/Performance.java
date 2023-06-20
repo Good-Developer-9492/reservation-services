@@ -64,20 +64,22 @@ public class Performance extends BaseTimeEntity {
                        String title,
                        String content,
                        String acting,
-                       FilmRating filmRating) {
+                       FilmRating filmRating,
+                       int price) {
         this(
-            place,
-            category,
-            startAt,
-            endAt,
-            startReservationAt,
-            endReservationAt,
-            title,
-            content,
-            acting,
-            filmRating,
-            null,
-            null
+                place,
+                category,
+                startAt,
+                endAt,
+                startReservationAt,
+                endReservationAt,
+                title,
+                content,
+                acting,
+                filmRating,
+                price,
+                null,
+                null
         );
     }
 
