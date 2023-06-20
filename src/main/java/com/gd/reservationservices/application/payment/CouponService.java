@@ -23,31 +23,19 @@ public class CouponService {
         Performance performance = performanceRepository.findById(command.performanceId())
                 .orElseThrow(() -> new IllegalArgumentException("공연정보를 찾을 수 없습니다"));
 
-        if (!ableValue(command.type(), performance.getPrice(), command.value())) {
-            throw new IllegalArgumentException("할인 금액은 공연가격(비율)을 초과할 수 없습니다");
-        }
-
         List<Coupon> coupons = new ArrayList<>();
 
         for (int i = 0; i < command.amount(); i++) {
-            coupons.add(new Coupon(
+            Coupon coupon = new Coupon(
                     performance,
                     command.type(),
                     command.value(),
-                    command.expiredAt()
-            ));
+                    command.expiredAt());
+            if (coupon.isOverPrice(command.value())) {
+                throw new IllegalArgumentException("할인 금액은 공연가격(비율)을 초과할 수 없습니다");
+            }
+            coupons.add(coupon);
         }
         return couponRepository.saveAll(coupons);
-    }
-
-    //todo 어디에 위치시킬지 고민
-    public boolean ableValue(Coupon.Type type, int price, int value) {
-        if (Coupon.Type.PERCENT.equals(type)) {
-            return value < 100;
-        }
-        if (Coupon.Type.WON.equals(type)) {
-            return value < price;
-        }
-        return false;
     }
 }

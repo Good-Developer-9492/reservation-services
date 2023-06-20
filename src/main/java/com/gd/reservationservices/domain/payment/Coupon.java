@@ -54,5 +54,14 @@ public class Coupon extends BaseTimeEntity {
         WON
     }
 
+    public boolean isOverPrice(int value) {
+        if (Coupon.Type.PERCENT.equals(this.type)) {
+            return value > 100;
+        }
+        if (Coupon.Type.WON.equals(this.type)) {
+            return value > this.performance.getPrice();
+        }
+        return false;
+    }
 
 }
