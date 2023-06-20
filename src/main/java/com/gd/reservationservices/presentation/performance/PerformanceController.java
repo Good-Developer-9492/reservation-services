@@ -21,20 +21,7 @@ public class PerformanceController {
         FindPerformance findPerformance = performanceService.find(id);
 
         return new SingleResponse.Ok<>(
-                new FindPerformanceResponse(
-                        findPerformance.id(),
-                        findPerformance.place(),
-                        findPerformance.category(),
-                        findPerformance.startAt(),
-                        findPerformance.startReservationAt(),
-                        findPerformance.endReservationAt(),
-                        findPerformance.createdAt(),
-                        findPerformance.updatedAt(),
-                        findPerformance.title(),
-                        findPerformance.content(),
-                        findPerformance.acting(),
-                        findPerformance.filmRating()
-                )
+            new FindPerformanceResponse(findPerformance)
         );
     }
 }
