@@ -44,13 +44,6 @@ public class UserService {
             updateUserCommend.age()
         );
 
-        return new UpdateUser(
-            user.getUserId(),
-            user.getName(),
-            user.getAgw(),
-            user.getEmail(),
-            user.getPhone(),
-            user.getRole()
-        );
+        return new UpdateUser(user);
     }
 }

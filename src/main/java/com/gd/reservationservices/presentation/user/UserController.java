@@ -3,7 +3,6 @@ package com.gd.reservationservices.presentation.user;
 import com.gd.reservationservices.application.user.UserService;
 import com.gd.reservationservices.application.user.dto.SearchUser;
 import com.gd.reservationservices.application.user.dto.UpdateUser;
-import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
 import com.gd.reservationservices.common.response.EmptyResponse;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.user.reqeust.UpdateUserRequest;
@@ -37,23 +36,11 @@ public class UserController {
 
     @PutMapping()
     public SingleResponse<UpdateUserResponse> update(@RequestBody UpdateUserRequest updateUserRequest) {
-
         UpdateUser updateUser =
-            userService.update(new UpdateUserCommend(
-                updateUserRequest.id(),
-                updateUserRequest.userPw(),
-                updateUserRequest.name(),
-                updateUserRequest.age()
-            ));
+            userService.update(updateUserRequest.toValue());
 
-        UpdateUserResponse updateUserResponse = new UpdateUserResponse(
-            updateUser.userId(),
-            updateUser.name(),
-            updateUser.age(),
-            updateUser.email(),
-            updateUser.phone(),
-            updateUser.role());
-
-        return new SingleResponse.Ok<>(updateUserResponse);
+        return new SingleResponse.Ok<>(
+            new UpdateUserResponse(updateUser)
+        );
     }
 }
