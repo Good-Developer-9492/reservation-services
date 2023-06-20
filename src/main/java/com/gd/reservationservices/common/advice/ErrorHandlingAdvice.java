@@ -1,5 +1,6 @@
 package com.gd.reservationservices.common.advice;
 
+import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.common.exception.ErrorCodeException;
 import com.gd.reservationservices.common.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
