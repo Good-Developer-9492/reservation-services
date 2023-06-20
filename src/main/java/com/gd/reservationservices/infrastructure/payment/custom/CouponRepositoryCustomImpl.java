@@ -1,10 +1,9 @@
 package com.gd.reservationservices.infrastructure.payment.custom;
 
-import com.gd.reservationservices.infrastructure.user.custom.UserRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
-public class CouponRepositoryCustomImpl implements UserRepositoryCustom {
+public class CouponRepositoryCustomImpl {
     private final JPAQueryFactory queryFactory;
 
     public CouponRepositoryCustomImpl(EntityManager entityManager) {

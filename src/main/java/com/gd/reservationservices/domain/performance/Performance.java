@@ -25,6 +25,9 @@ public class Performance extends BaseTimeEntity {
     private LocalDateTime startAt;
 
     @Column(nullable = false)
+    private LocalDateTime endAt;
+
+    @Column(nullable = false)
     private LocalDateTime startReservationAt;
 
     @Column(nullable = false)
@@ -52,12 +55,39 @@ public class Performance extends BaseTimeEntity {
     @Column
     private String cancelReason;
 
+    public Performance(Place place,
+                       Category category,
+                       LocalDateTime startAt,
+                       LocalDateTime endAt,
+                       LocalDateTime startReservationAt,
+                       LocalDateTime endReservationAt,
+                       String title,
+                       String content,
+                       String acting,
+                       FilmRating filmRating) {
+        this(
+            place,
+            category,
+            startAt,
+            endAt,
+            startReservationAt,
+            endReservationAt,
+            title,
+            content,
+            acting,
+            filmRating,
+            null,
+            null
+        );
+    }
+
     protected Performance() {
     }
 
     public Performance(Place place,
                        Category category,
                        LocalDateTime startAt,
+                       LocalDateTime endAt,
                        LocalDateTime startReservationAt,
                        LocalDateTime endReservationAt,
                        String title,
@@ -70,6 +100,7 @@ public class Performance extends BaseTimeEntity {
         this.place = place;
         this.category = category;
         this.startAt = startAt;
+        this.endAt = endAt;
         this.startReservationAt = startReservationAt;
         this.endReservationAt = endReservationAt;
         this.title = title;
