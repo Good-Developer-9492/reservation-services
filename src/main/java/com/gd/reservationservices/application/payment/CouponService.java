@@ -38,4 +38,9 @@ public class CouponService {
         }
         return couponRepository.saveAll(coupons);
     }
+
+    public Coupon findById(Long id) {
+        return couponRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
+    }
 }
