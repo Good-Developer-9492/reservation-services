@@ -19,3 +19,14 @@ Accept: application/json
 ### GET request find user not found
 GET http://localhost:8080/users/9999999999
 Accept: application/json
+
+### PUT request update user
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "1",
+  "userPw": "user123456789",
+  "name": "change name",
+  "age": 19
+}
