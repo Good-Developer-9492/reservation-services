@@ -10,16 +10,6 @@ import java.util.Optional;
 import static com.gd.reservationservices.domain.performance.QPerformance.performance;
 import static com.gd.reservationservices.domain.performance.QPlace.place;
 
-public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCustom {
-import com.gd.reservationservices.domain.performance.Performance;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
-
-import java.util.Optional;
-
-import static com.gd.reservationservices.domain.performance.QPerformance.performance;
-import static com.gd.reservationservices.domain.performance.QPlace.place;
-
 public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
