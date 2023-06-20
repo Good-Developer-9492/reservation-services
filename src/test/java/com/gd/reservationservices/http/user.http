@@ -1,3 +1,4 @@
+### POST request create user
 POST http://localhost:8080/users
 Content-Type: application/json
 
@@ -10,3 +11,11 @@ Content-Type: application/json
   "phone": "01012345678",
   "role": "BUSINESS"
 }
+
+### GET request find user success
+GET http://localhost:8080/users/1
+Accept: application/json
+
+### GET request find user not found
+GET http://localhost:8080/users/9999999999
+Accept: application/json
