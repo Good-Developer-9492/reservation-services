@@ -1,41 +1,58 @@
 package com.gd.reservationservices.presentation.user;
 
 import com.gd.reservationservices.application.user.UserService;
+import com.gd.reservationservices.application.user.dto.SearchUser;
 import com.gd.reservationservices.application.user.dto.UpdateUser;
 import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
+import com.gd.reservationservices.common.response.EmptyResponse;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.user.reqeust.UpdateUserRequest;
+import com.gd.reservationservices.presentation.user.request.CreateUserRequest;
+import com.gd.reservationservices.presentation.user.response.SearchUserResponse;
 import com.gd.reservationservices.presentation.user.response.UpdateUserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
+    @PostMapping("/users")
+    public EmptyResponse join(@RequestBody CreateUserRequest createUserRequest) {
+        userService.joinBusinessUser(createUserRequest.toValue());
+
+        return new EmptyResponse.Ok<>();
+    }
+
+    @GetMapping("/users/{id}")
+    public SingleResponse<SearchUserResponse> searchUser(@PathVariable Long id) {
+        SearchUser searchUser = userService.searchUser(id);
+
+        SearchUserResponse searchUserResponse = new SearchUserResponse(searchUser);
+
+        return new SingleResponse.Ok<>(searchUserResponse);
+    }
+
     @PutMapping("/users")
     public SingleResponse<UpdateUserResponse> update(@RequestBody UpdateUserRequest updateUserRequest) {
 
         UpdateUser updateUser =
-                userService.update(new UpdateUserCommend(
-                        updateUserRequest.id(),
-                        updateUserRequest.userPw(),
-                        updateUserRequest.name(),
-                        updateUserRequest.age()
-                ));
+            userService.update(new UpdateUserCommend(
+                updateUserRequest.id(),
+                updateUserRequest.userPw(),
+                updateUserRequest.name(),
+                updateUserRequest.age()
+            ));
 
         UpdateUserResponse updateUserResponse = new UpdateUserResponse(
-                updateUser.userId(),
-                updateUser.name(),
-                updateUser.age(),
-                updateUser.email(),
-                updateUser.phone(),
-                updateUser.role());
+            updateUser.userId(),
+            updateUser.name(),
+            updateUser.age(),
+            updateUser.email(),
+            updateUser.phone(),
+            updateUser.role());
 
         return new SingleResponse.Ok<>(updateUserResponse);
     }
-
 }

@@ -1,5 +1,7 @@
 package com.gd.reservationservices.application.user;
 
+import com.gd.reservationservices.application.user.command.CreateUser;
+import com.gd.reservationservices.application.user.dto.SearchUser;
 import com.gd.reservationservices.application.user.dto.UpdateUser;
 import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
@@ -16,23 +18,39 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
+    public void joinBusinessUser(CreateUser createUser) {
+        if (userRepository.exists(createUser.userId())) {
+            throw new IllegalArgumentException("이미 등록된 아이디 입니다.");
+        }
+
+        userRepository.save(createUser.toEntity());
+    }
+
+    public SearchUser searchUser(Long id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(UserNotFoundException::new);
+
+        return new SearchUser(user);
+    }
+
+    @Transactional
     public UpdateUser update(UpdateUserCommend updateUserCommend) {
         User user = userRepository.findById(updateUserCommend.id())
-                .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(UserNotFoundException::new);
 
         user.correctionOfInformation(
-                updateUserCommend.userPw(),
-                updateUserCommend.name(),
-                updateUserCommend.age()
+            updateUserCommend.userPw(),
+            updateUserCommend.name(),
+            updateUserCommend.age()
         );
 
         return new UpdateUser(
-                user.getUserId(),
-                user.getName(),
-                user.getAgw(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getRole()
+            user.getUserId(),
+            user.getName(),
+            user.getAgw(),
+            user.getEmail(),
+            user.getPhone(),
+            user.getRole()
         );
     }
 }
