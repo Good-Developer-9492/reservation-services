@@ -1,5 +1,6 @@
 package com.gd.reservationservices.application.user;
 
+import com.gd.reservationservices.application.user.command.CreateUser;
 import com.gd.reservationservices.application.user.dto.SearchUser;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.user.User;
@@ -13,6 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
+
+    @Transactional
+    public void joinBusinessUser(CreateUser createUser) {
+        if (userRepository.exists(createUser.userId())) {
+            throw new IllegalArgumentException("이미 등록된 아이디 입니다.");
+        }
+
+        userRepository.save(createUser.toEntity());
+    }
 
     public SearchUser searchUser(Long id) {
         User user = userRepository.findById(id)

@@ -2,17 +2,23 @@ package com.gd.reservationservices.presentation.user;
 
 import com.gd.reservationservices.application.user.UserService;
 import com.gd.reservationservices.application.user.dto.SearchUser;
+import com.gd.reservationservices.common.response.EmptyResponse;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.user.response.SearchUserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @PostMapping("/users")
+    public EmptyResponse join(@RequestBody CreateUserRequest createUserRequest) {
+        userService.joinBusinessUser(createUserRequest.toValue());
+
+        return new EmptyResponse.Ok<>();
+    }
 
     @GetMapping("/users/{id}")
     public SingleResponse<SearchUserResponse> join(@PathVariable Long id) {
