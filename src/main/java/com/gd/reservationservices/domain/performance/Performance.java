@@ -61,21 +61,20 @@ public class Performance extends BaseTimeEntity {
                        String title,
                        String content,
                        String acting,
-                       FilmRating filmRating
-    ) {
+                       FilmRating filmRating) {
         this(
-                place,
-                category,
-                startAt,
-                endAt,
-                startReservationAt,
-                endReservationAt,
-                title,
-                content,
-                acting,
-                filmRating,
-                null,
-                null
+            place,
+            category,
+            startAt,
+            endAt,
+            startReservationAt,
+            endReservationAt,
+            title,
+            content,
+            acting,
+            filmRating,
+            null,
+            null
         );
     }
 
@@ -93,8 +92,7 @@ public class Performance extends BaseTimeEntity {
                        String acting,
                        FilmRating filmRating,
                        LocalDateTime canceledAt,
-                       String cancelReason
-    ) {
+                       String cancelReason) {
         this.place = place;
         this.category = category;
         this.startAt = startAt;
