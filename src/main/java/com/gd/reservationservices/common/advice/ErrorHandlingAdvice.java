@@ -19,8 +19,8 @@ public class ErrorHandlingAdvice {
     @ExceptionHandler({
             UserNotFoundException.class
     })
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse badRequest(ErrorCodeException e) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse notFound(ErrorCodeException e) {
         return new ErrorResponse(e);
     }
 }
