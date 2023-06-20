@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping()
     public EmptyResponse join(@RequestBody CreateUserRequest createUserRequest) {
         userService.joinBusinessUser(createUserRequest.toValue());
 
         return new EmptyResponse.Ok<>();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public SingleResponse<SearchUserResponse> searchUser(@PathVariable Long id) {
         SearchUser searchUser = userService.searchUser(id);
 
@@ -34,7 +35,7 @@ public class UserController {
         return new SingleResponse.Ok<>(searchUserResponse);
     }
 
-    @PutMapping("/users")
+    @PutMapping()
     public SingleResponse<UpdateUserResponse> update(@RequestBody UpdateUserRequest updateUserRequest) {
 
         UpdateUser updateUser =
