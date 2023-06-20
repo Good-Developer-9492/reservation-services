@@ -2,7 +2,7 @@ package com.gd.reservationservices.presentation.performance;
 
 import com.gd.reservationservices.application.performance.PerformanceService;
 import com.gd.reservationservices.application.performance.dto.CreatePerformance;
-import com.gd.reservationservices.application.performance.dto.CreatePerformanceCommend;
+import com.gd.reservationservices.application.performance.dto.CreatePerformanceCommand;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.performance.request.CreatePerformanceRequest;
 import com.gd.reservationservices.presentation.performance.response.CreatePerformanceResponse;
@@ -26,7 +26,7 @@ public class PerformanceController {
     @PostMapping
     public SingleResponse<CreatePerformanceResponse> create(@RequestBody CreatePerformanceRequest createPerformanceRequest) {
         CreatePerformance createPerformance =
-                performanceService.create(new CreatePerformanceCommend(
+                performanceService.create(new CreatePerformanceCommand(
                         createPerformanceRequest.placeId(),
                         createPerformanceRequest.category(),
                         createPerformanceRequest.startAt(),

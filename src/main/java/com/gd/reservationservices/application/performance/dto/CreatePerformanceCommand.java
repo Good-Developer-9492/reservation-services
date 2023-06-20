@@ -2,7 +2,7 @@ package com.gd.reservationservices.application.performance.dto;
 
 import java.time.LocalDateTime;
 
-public record CreatePerformanceCommend(
+public record CreatePerformanceCommand(
         Long placeId,
         String category,
         LocalDateTime startAt,
