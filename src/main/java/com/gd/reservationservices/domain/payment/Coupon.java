@@ -3,10 +3,13 @@ package com.gd.reservationservices.domain.payment;
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import com.gd.reservationservices.domain.performance.Performance;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
+@Getter
 public class Coupon extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,16 +39,13 @@ public class Coupon extends BaseTimeEntity {
     }
 
     public Coupon(Performance performance,
-                  String code,
                   Type type,
                   Integer value,
-                  LocalDateTime usedAt,
                   LocalDateTime expiredAt) {
         this.performance = performance;
-        this.code = code;
+        this.code = UUID.randomUUID().toString();
         this.type = type;
         this.value = value;
-        this.usedAt = usedAt;
         this.expiredAt = expiredAt;
     }
 
@@ -53,4 +53,15 @@ public class Coupon extends BaseTimeEntity {
         PERCENT,
         WON
     }
+
+    public boolean isOverPrice(int value) {
+        if (Coupon.Type.PERCENT.equals(this.type)) {
+            return value > 100;
+        }
+        if (Coupon.Type.WON.equals(this.type)) {
+            return value > this.performance.getPrice();
+        }
+        return false;
+    }
+
 }
