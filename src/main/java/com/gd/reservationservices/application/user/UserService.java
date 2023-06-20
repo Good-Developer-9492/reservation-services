@@ -1,8 +1,6 @@
 package com.gd.reservationservices.application.user;
 
 import com.gd.reservationservices.application.user.command.CreateUser;
-import com.gd.reservationservices.domain.user.Role;
-import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,15 +18,6 @@ public class UserService {
             throw new IllegalArgumentException("이미 등록된 아이디 입니다.");
         }
 
-        userRepository.save(
-            new User(
-                createUser.userId(),
-                createUser.userPw(),
-                createUser.name(),
-                createUser.age(),
-                createUser.email(),
-                createUser.phone(),
-                Role.valueOf(createUser.role())
-            ));
+        userRepository.save(createUser.toEntity());
     }
 }
