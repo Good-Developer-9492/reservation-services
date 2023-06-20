@@ -4,6 +4,17 @@ import com.gd.reservationservices.domain.performance.Performance;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static com.gd.reservationservices.domain.performance.QPerformance.performance;
+import static com.gd.reservationservices.domain.performance.QPlace.place;
+
+public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCustom {
+import com.gd.reservationservices.domain.performance.Performance;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
+
 import java.util.Optional;
 
 import static com.gd.reservationservices.domain.performance.QPerformance.performance;
@@ -17,13 +28,27 @@ public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCus
     }
 
     @Override
+    public boolean exists(Long placeId, LocalDateTime startAt, LocalDateTime endAt) {
+        Integer fetchOne = queryFactory
+            .selectOne()
+            .from(performance)
+            .where(
+                performance.place.id.eq(placeId),
+                performance.startAt.between(startAt, endAt)
+                    .or(performance.endAt.between(startAt, endAt))
+            )
+            .fetchFirst();
+        return fetchOne != null;
+    }
+
+    @Override
     public Optional<Performance> findPerformanceAndPlace(Long id) {
         return Optional.ofNullable(queryFactory
-                .selectFrom(performance)
-                .join(performance.place, place).fetchJoin()
-                .where(
-                        performance.id.eq(id)
-                )
-                .fetchOne());
+            .selectFrom(performance)
+            .join(performance.place, place).fetchJoin()
+            .where(
+                performance.id.eq(id)
+            )
+            .fetchOne());
     }
 }

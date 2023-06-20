@@ -1,3 +1,20 @@
+### POST request create performance
+POST http://localhost:8080/performance
+Content-Type: application/json
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 12:00:00",
+  "endAt": "2023-06-25 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL"
+}
+
 ### GET request find performance information
 GET http://localhost:8080/performance/business/1
 Accept: application/json

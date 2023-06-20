@@ -1,0 +1,32 @@
+### POST request create user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "userId": "user01",
+  "userPw": "user123456789",
+  "name": "user name1",
+  "age": 18,
+  "email": "user@email.com",
+  "phone": "01012345678",
+  "role": "BUSINESS"
+}
+
+### GET request find user success
+GET http://localhost:8080/users/1
+Accept: application/json
+
+### GET request find user not found
+GET http://localhost:8080/users/9999999999
+Accept: application/json
+
+### PUT request update user
+PUT http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "1",
+  "userPw": "user123456789",
+  "name": "change name",
+  "age": 19
+}
