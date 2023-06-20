@@ -4,7 +4,7 @@ import com.gd.reservationservices.domain.payment.Coupon;
 
 import java.time.LocalDateTime;
 
-public record CouponCommand(
+public record CreateCouponValue(
         Long performanceId,
         Coupon.Type type,
         Integer value,

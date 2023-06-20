@@ -1,6 +1,6 @@
 package com.gd.reservationservices.presentation.payment;
 
-import com.gd.reservationservices.application.payment.CouponCommand;
+import com.gd.reservationservices.application.payment.CreateCouponValue;
 import com.gd.reservationservices.application.payment.CouponService;
 import com.gd.reservationservices.common.response.ListResponse;
 import com.gd.reservationservices.domain.payment.Coupon;
@@ -20,13 +20,7 @@ public class BusinessCouponController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ListResponse<Coupon> createCoupon(@RequestBody CreateCouponCreateRequest request) {
-        List<Coupon> result = couponService.create(new CouponCommand(
-                request.performanceId(),
-                request.type(),
-                request.value(),
-                request.expiredAt(),
-                request.amount()
-        ));
+        List<Coupon> result = couponService.create(request.toValue());
         return new ListResponse.Ok<>(result, null);
     }
 }

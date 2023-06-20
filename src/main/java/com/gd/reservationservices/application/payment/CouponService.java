@@ -19,7 +19,7 @@ public class CouponService {
     private final PerformanceRepository performanceRepository;
 
     @Transactional
-    public List<Coupon> create(CouponCommand command) {
+    public List<Coupon> create(CreateCouponValue command) {
         Performance performance = performanceRepository.findById(command.performanceId())
                 .orElseThrow(() -> new IllegalArgumentException("공연정보를 찾을 수 없습니다"));
 
