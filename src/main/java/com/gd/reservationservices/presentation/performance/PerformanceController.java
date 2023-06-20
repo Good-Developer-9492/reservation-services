@@ -2,7 +2,6 @@ package com.gd.reservationservices.presentation.performance;
 
 import com.gd.reservationservices.application.performance.PerformanceService;
 import com.gd.reservationservices.application.performance.dto.CreatePerformance;
-import com.gd.reservationservices.application.performance.dto.CreatePerformanceCommand;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.performance.request.CreatePerformanceRequest;
 import com.gd.reservationservices.presentation.performance.response.CreatePerformanceResponse;
@@ -26,33 +25,9 @@ public class PerformanceController {
     @PostMapping
     public SingleResponse<CreatePerformanceResponse> create(@RequestBody CreatePerformanceRequest createPerformanceRequest) {
         CreatePerformance createPerformance =
-                performanceService.create(new CreatePerformanceCommand(
-                        createPerformanceRequest.placeId(),
-                        createPerformanceRequest.category(),
-                        createPerformanceRequest.startAt(),
-                        createPerformanceRequest.endAt(),
-                        createPerformanceRequest.startReservationAt(),
-                        createPerformanceRequest.endReservationAt(),
-                        createPerformanceRequest.title(),
-                        createPerformanceRequest.content(),
-                        createPerformanceRequest.acting(),
-                        createPerformanceRequest.filmRating()
-                ));
+                performanceService.create(createPerformanceRequest.toValue());
 
         return new SingleResponse.Ok<>(
-                new CreatePerformanceResponse(
-                        createPerformance.place(),
-                        createPerformance.category(),
-                        createPerformance.startAt(),
-                        createPerformance.startReservationAt(),
-                        createPerformance.endReservationAt(),
-                        createPerformance.createdAt(),
-                        createPerformance.updatedAt(),
-                        createPerformance.title(),
-                        createPerformance.content(),
-                        createPerformance.acting(),
-                        createPerformance.filmRating()
-                ));
+                new CreatePerformanceResponse(createPerformance));
     }
-
 }
