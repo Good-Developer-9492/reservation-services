@@ -38,7 +38,7 @@ public class UserService {
         User user = userRepository.findById(updateUserCommend.id())
             .orElseThrow(UserNotFoundException::new);
 
-        user.correctionOfInformation(
+        user.updateInformation(
             updateUserCommend.userPw(),
             updateUserCommend.name(),
             updateUserCommend.age()

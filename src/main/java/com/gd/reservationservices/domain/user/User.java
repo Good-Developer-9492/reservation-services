@@ -52,7 +52,7 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public void correctionOfInformation(String userPw, String name, int age) {
+    public void updateInformation(String userPw, String name, int age) {
         this.userPw = userPw;
         this.name = name;
         this.agw = age;
