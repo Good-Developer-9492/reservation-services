@@ -7,14 +7,12 @@ import com.gd.reservationservices.domain.payment.Coupon;
 import com.gd.reservationservices.presentation.payment.request.CreateCouponCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("business/coupons")
+@RestController
+@RequestMapping("/business/coupons")
 @RequiredArgsConstructor
 public class BusinessCouponController {
     private final CouponService couponService;
