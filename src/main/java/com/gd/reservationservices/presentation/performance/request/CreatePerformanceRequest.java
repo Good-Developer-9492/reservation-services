@@ -19,6 +19,7 @@ public record CreatePerformanceRequest(
     String title,
     String content,
     String acting,
+    int price,
     String filmRating
 ) {
     public CreatePerformanceCommand toValue() {
@@ -32,6 +33,7 @@ public record CreatePerformanceRequest(
             this.title,
             this.content,
             this.acting,
+            this.price,
             this.filmRating
         );
     }

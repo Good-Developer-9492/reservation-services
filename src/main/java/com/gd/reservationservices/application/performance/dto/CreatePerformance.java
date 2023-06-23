@@ -16,6 +16,7 @@ public record CreatePerformance(
     String title,
     String content,
     String acting,
+    int price,
     FilmRating filmRating,
     LocalDateTime createdAt,
     LocalDateTime updatedAt
@@ -31,6 +32,7 @@ public record CreatePerformance(
             performance.getTitle(),
             performance.getContent(),
             performance.getActing(),
+            performance.getPrice(),
             FilmRating.valueOf(performance.getFilmRating().toString()),
             performance.getCreatedAt(),
             performance.getUpdatedAt()

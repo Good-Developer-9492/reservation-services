@@ -64,6 +64,7 @@ public class Performance extends BaseTimeEntity {
                        String title,
                        String content,
                        String acting,
+                       int price,
                        FilmRating filmRating) {
         this(
             place,
@@ -76,6 +77,7 @@ public class Performance extends BaseTimeEntity {
             content,
             acting,
             filmRating,
+            price,
             null,
             null
         );

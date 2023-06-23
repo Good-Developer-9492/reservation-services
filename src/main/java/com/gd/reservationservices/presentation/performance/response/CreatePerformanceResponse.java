@@ -18,6 +18,7 @@ public record CreatePerformanceResponse(
     String title,
     String content,
     String acting,
+    int price,
     FilmRating filmRating
 ) {
     public CreatePerformanceResponse(CreatePerformance createPerformance) {
@@ -32,6 +33,7 @@ public record CreatePerformanceResponse(
             createPerformance.title(),
             createPerformance.content(),
             createPerformance.acting(),
+            createPerformance.price(),
             createPerformance.filmRating()
         );
     }

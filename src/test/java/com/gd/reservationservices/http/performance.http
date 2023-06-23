@@ -11,5 +11,6 @@ Content-Type: application/json
   "title": "태권v",
   "content": "지구를 지킨다.",
   "acting": "로봇1",
+  "price": 50000,
   "filmRating": "ALL"
 }

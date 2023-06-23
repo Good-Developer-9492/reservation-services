@@ -15,6 +15,7 @@ public record CreatePerformanceCommand(
     String title,
     String content,
     String acting,
+    int price,
     String filmRating
 ) {
     public Performance toEntity(Place place) {
@@ -28,6 +29,7 @@ public record CreatePerformanceCommand(
             this.title,
             this.content,
             this.acting,
+            this.price,
             Performance.FilmRating.valueOf(this.filmRating)
         );
     }
