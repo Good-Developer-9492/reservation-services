@@ -18,6 +18,3 @@ Content-Type: application/json
 ### GET request find performance information
 GET http://localhost:8080/performance/business/1
 Accept: application/json
-
-### 예매 목록 조회
-GET http://localhost:8080/business/reservations/performance/1?page=1&perPage=10

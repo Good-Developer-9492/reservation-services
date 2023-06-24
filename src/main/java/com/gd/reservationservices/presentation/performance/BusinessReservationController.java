@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/business/reservations")
+@RequestMapping("/business/performances")
 @RequiredArgsConstructor
 public class BusinessReservationController {
     private final ReservationService reservationService;
 
-    @GetMapping("/performance/{performanceId}")
+    @GetMapping("/{performanceId}/reservations")
     public ResponseEntity<ListResponse<ReservationResponse>> getAllReservations(@PathVariable Long performanceId,
                                                                                 PagingRequest pagingRequest) {
         Page<Reservation> reservation = reservationService.getAllReservations(performanceId, pagingRequest.toPageable());
