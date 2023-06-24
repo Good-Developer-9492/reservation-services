@@ -1,6 +1,8 @@
 package com.gd.reservationservices.application.performance;
 
 import com.gd.reservationservices.application.performance.exception.PerformanceNotFoundException;
+import com.gd.reservationservices.application.performance.exception.ReservationNotFoundException;
+import com.gd.reservationservices.application.performance.exception.ReservationNotMatchedException;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.infrastructure.performance.PerformanceRepository;
@@ -21,5 +23,16 @@ public class ReservationService {
             .orElseThrow(PerformanceNotFoundException::new);
 
         return reservationRepository.findAllByPerformance(performance, pageable);
+    }
+
+    public Reservation getReservation(Long performanceId, Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+            .orElseThrow(ReservationNotFoundException::new);
+
+        if (!performanceId.equals(reservation.getPerformance().getId())) {
+            throw new ReservationNotMatchedException();
+        }
+
+        return reservation;
     }
 }
