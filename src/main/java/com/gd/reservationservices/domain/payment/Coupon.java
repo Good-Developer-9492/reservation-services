@@ -35,23 +35,38 @@ public class Coupon extends BaseTimeEntity {
     @Column(nullable = false)
     private LocalDateTime expiredAt;
 
-    protected Coupon() {
-    }
 
     public Coupon(Performance performance,
                   Type type,
                   Integer value,
                   LocalDateTime expiredAt) {
-        this.performance = performance;
-        this.code = UUID.randomUUID().toString();
-        this.type = type;
-        this.value = value;
-        this.expiredAt = expiredAt;
+        this(null, performance, UUID.randomUUID().toString(), type, value, null, expiredAt);
     }
 
     public enum Type {
         PERCENT,
         WON
+    }
+
+    public Coupon delete() {
+        this.expiredAt = LocalDateTime.now();
+        return this;
+    }
+
+    public Coupon update(Performance performance,
+                         Type type,
+                         Integer value,
+                         LocalDateTime expiredAt) {
+        this.performance = performance;
+        this.type = type;
+        this.value = value;
+        this.expiredAt = expiredAt;
+        return this;
+    }
+
+    public Coupon use() {
+        this.usedAt = LocalDateTime.now();
+        return this;
     }
 
     public boolean isOverPrice(int value) {
@@ -64,4 +79,16 @@ public class Coupon extends BaseTimeEntity {
         return false;
     }
 
+    protected Coupon() {
+    }
+
+    public Coupon(Long id, Performance performance, String code, Type type, Integer value, LocalDateTime usedAt, LocalDateTime expiredAt) {
+        this.id = id;
+        this.performance = performance;
+        this.code = code;
+        this.type = type;
+        this.value = value;
+        this.usedAt = usedAt;
+        this.expiredAt = expiredAt;
+    }
 }
