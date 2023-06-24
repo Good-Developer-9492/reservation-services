@@ -1,5 +1,7 @@
 package com.gd.reservationservices.common.request;
 
+import org.springframework.data.domain.PageRequest;
+
 import java.util.Optional;
 
 public record PagingRequest(Integer page, Integer perPage) {
@@ -9,5 +11,9 @@ public record PagingRequest(Integer page, Integer perPage) {
             .orElse(0);
         this.perPage = Optional.ofNullable(perPage)
             .orElse(10);
+    }
+
+    public PageRequest toPageable() {
+        return PageRequest.of(this.page, this.perPage);
     }
 }
