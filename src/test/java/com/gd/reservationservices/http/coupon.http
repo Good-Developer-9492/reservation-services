@@ -26,10 +26,8 @@ Content-Type: application/json
 }
 
 ### PUT 쿠폰 사용
-PUT http://localhost:8080/business/coupons/use/1130
+PUT http://localhost:8080/customer/coupons/use/1130
 Content-Type: application/json
-
-
 
 ### DELETE 쿠폰 삭제
 DELETE http://localhost:8080/business/coupons/1130

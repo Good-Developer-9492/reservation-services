@@ -41,13 +41,6 @@ public class BusinessCouponController {
         return new EmptyResponse.Ok<>();
     }
 
-    @PutMapping("/use/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public EmptyResponse useCoupon(@PathVariable Long id) {
-        couponService.use(id);
-        return new EmptyResponse.Ok<>();
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EmptyResponse updateCoupon(@PathVariable Long id) {
