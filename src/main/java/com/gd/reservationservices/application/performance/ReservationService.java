@@ -3,6 +3,8 @@ package com.gd.reservationservices.application.performance;
 import com.gd.reservationservices.application.performance.dto.ReservationCreateValue;
 import com.gd.reservationservices.application.performance.exception.AlreadyReservedSeatException;
 import com.gd.reservationservices.application.performance.exception.PerformanceNotFoundException;
+import com.gd.reservationservices.application.performance.exception.ReservationNotFoundException;
+import com.gd.reservationservices.application.performance.exception.ReservationNotMatchedException;
 import com.gd.reservationservices.application.performance.exception.SeatNotFoundException;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.performance.Performance;
@@ -63,5 +65,16 @@ public class ReservationService {
             .orElseThrow(PerformanceNotFoundException::new);
 
         return reservationRepository.findAllByPerformance(performance, pageable);
+    }
+
+    public Reservation getReservation(Long performanceId, Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+            .orElseThrow(ReservationNotFoundException::new);
+
+        if (!performanceId.equals(reservation.getPerformance().getId())) {
+            throw new ReservationNotMatchedException();
+        }
+
+        return reservation;
     }
 }

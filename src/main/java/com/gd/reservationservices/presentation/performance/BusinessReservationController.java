@@ -4,6 +4,7 @@ import com.gd.reservationservices.application.performance.ReservationService;
 import com.gd.reservationservices.common.request.PagingRequest;
 import com.gd.reservationservices.common.response.ListResponse;
 import com.gd.reservationservices.common.response.Paging;
+import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.presentation.performance.response.ReservationResponse;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,17 @@ public class BusinessReservationController {
                 reservation.getPageable().getPageSize(),
                 reservation.getTotalPages()
             )
+        );
+    }
+
+    @GetMapping("/{performanceId}/reservations/{reservationId}")
+    @ResponseStatus(HttpStatus.OK)
+    public SingleResponse<ReservationResponse> getReservation(@PathVariable Long performanceId,
+                                                              @PathVariable Long reservationId) {
+        Reservation reservation = reservationService.getReservation(performanceId, reservationId);
+
+        return new SingleResponse.Ok<>(
+            new ReservationResponse(reservation)
         );
     }
 }
