@@ -1,7 +1,7 @@
 package com.gd.reservationservices.presentation.performance.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gd.reservationservices.application.performance.dto.CreatePerformanceCommand;
+import com.gd.reservationservices.application.performance.dto.CreatePerformanceValue;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -25,8 +25,8 @@ public record CreatePerformanceRequest(
     int price,
     Collection<SeatRequest> seats
 ) {
-    public CreatePerformanceCommand toValue() {
-        return new CreatePerformanceCommand(
+    public CreatePerformanceValue toValue() {
+        return new CreatePerformanceValue(
             this.placeId,
             this.category,
             this.startAt,
@@ -48,8 +48,8 @@ public record CreatePerformanceRequest(
         String location,
         int seatCount
     ) {
-        public CreatePerformanceCommand.SeatCommand toValue() {
-            return new CreatePerformanceCommand.SeatCommand(
+        public CreatePerformanceValue.SeatValue toValue() {
+            return new CreatePerformanceValue.SeatValue(
                 this.location,
                 this.seatCount
             );

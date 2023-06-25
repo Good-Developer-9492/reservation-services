@@ -1,7 +1,7 @@
 package com.gd.reservationservices.application.performance;
 
 import com.gd.reservationservices.application.performance.dto.CreatePerformance;
-import com.gd.reservationservices.application.performance.dto.CreatePerformanceCommand;
+import com.gd.reservationservices.application.performance.dto.CreatePerformanceValue;
 import com.gd.reservationservices.application.performance.dto.FindPerformance;
 import com.gd.reservationservices.application.performance.dto.PerformancePlace;
 import com.gd.reservationservices.domain.performance.Performance;
@@ -25,21 +25,21 @@ public class PerformanceService {
     private final SeatRepository seatRepository;
 
     @Transactional
-    public CreatePerformance create(CreatePerformanceCommand createPerformanceCommand) {
+    public CreatePerformance create(CreatePerformanceValue createPerformanceValue) {
         if (performanceRepository.exists(
-            createPerformanceCommand.placeId(),
-            createPerformanceCommand.startAt(),
-            createPerformanceCommand.endAt())
+            createPerformanceValue.placeId(),
+            createPerformanceValue.startAt(),
+            createPerformanceValue.endAt())
         ) {
             throw new IllegalArgumentException("해당 시간에 공연을 등록할 수 없습니다.");
         }
 
-        Place place = placeRepository.findById(createPerformanceCommand.placeId())
+        Place place = placeRepository.findById(createPerformanceValue.placeId())
             .orElseThrow(() -> new IllegalArgumentException("공연장 정보가 존재하지 않습니다."));
 
         PerformanceSeatGroups performanceSeats =
             new PerformanceSeatGroups(
-                createPerformanceCommand.seats().stream()
+                createPerformanceValue.seats().stream()
                     .map(s -> new PerformanceSeatGroups.SeatInfo(s.location(), s.seatCount()))
                     .collect(Collectors.toList())
             );
@@ -48,7 +48,7 @@ public class PerformanceService {
             throw new IllegalArgumentException("등록 좌석 정보가 공연장 최대 좌석 수를 초과하였습니다.");
         }
 
-        Performance newPerformance = createPerformanceCommand.toEntity(place);
+        Performance newPerformance = createPerformanceValue.toEntity(place);
         performanceRepository.save(newPerformance);
 
         seatRepository.saveAll(

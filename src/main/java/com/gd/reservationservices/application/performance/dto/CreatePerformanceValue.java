@@ -6,7 +6,7 @@ import com.gd.reservationservices.domain.performance.Place;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record CreatePerformanceCommand(
+public record CreatePerformanceValue(
     Long placeId,
     String category,
     LocalDateTime startAt,
@@ -18,7 +18,7 @@ public record CreatePerformanceCommand(
     String acting,
     String filmRating,
     int price,
-    List<SeatCommand> seats
+    List<SeatValue> seats
 ) {
     public Performance toEntity(Place place) {
         return new Performance(
@@ -36,7 +36,7 @@ public record CreatePerformanceCommand(
         );
     }
 
-    public record SeatCommand(
+    public record SeatValue(
         String location,
         int seatCount
     ) {
