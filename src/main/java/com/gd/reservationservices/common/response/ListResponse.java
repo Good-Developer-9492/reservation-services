@@ -1,9 +1,11 @@
 package com.gd.reservationservices.common.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 @AllArgsConstructor
 public class ListResponse<T> {
     private final List<T> items;
