@@ -26,7 +26,10 @@ public abstract class ErrorCodeException extends RuntimeException {
     }
 
     protected enum ErrorCode {
-        USER_NOT_FOUND("사용자 정보가 존재하지 않습니다.");
+        USER_NOT_FOUND("사용자 정보가 존재하지 않습니다."),
+        PERFORMANCE_NOT_FOUND("공연 정보가 존재하지 않습니다."),
+        SEAT_NOT_FOUND("좌석 정보가 존재하지 않습니다."),
+        ALREADY_RESERVED_SEAT("이미 선택된 좌석입니다.");
 
         private final String message;
 

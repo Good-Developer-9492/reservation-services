@@ -43,4 +43,30 @@ public class CouponService {
         return couponRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
     }
+
+    @Transactional
+    public void update(UpdateCouponValue value) {
+        Coupon coupon = couponRepository.findById(value.id()).orElseThrow(() ->
+                new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
+
+        Performance performance = performanceRepository.findById(value.performanceId())
+                .orElseThrow(() -> new IllegalArgumentException("공연정보를 찾을 수 없습니다"));
+
+        couponRepository.save(coupon.update(performance, value.type(), value.value(), value.expiredAt()));
+    }
+
+    @Transactional
+    public void use(Long id) {
+        Coupon coupon = couponRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
+
+        couponRepository.save(coupon.use());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Coupon coupon = couponRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
+        couponRepository.save(coupon.delete());
+    }
 }

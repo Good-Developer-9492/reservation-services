@@ -3,10 +3,12 @@ package com.gd.reservationservices.domain.performance;
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import com.gd.reservationservices.domain.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
