@@ -9,9 +9,8 @@ public class Seat extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "performance_id", nullable = false)
-    private Performance performance;
+    @Column(nullable = false)
+    private Long performanceId;
 
     @Column(nullable = false)
     private String location;
@@ -25,10 +24,18 @@ public class Seat extends BaseTimeEntity {
     protected Seat() {
     }
 
-    public Seat(Performance performance, String location, Integer number, Boolean isReserved) {
-        this.performance = performance;
+    public Seat(Long performanceId, String location, Integer number, Boolean isReserved) {
+        this.performanceId = performanceId;
         this.location = location;
         this.number = number;
         this.isReserved = isReserved;
+    }
+
+    public Boolean isReserved() {
+        return Boolean.TRUE.equals(this.isReserved);
+    }
+
+    public void reserve() {
+        this.isReserved = true;
     }
 }
