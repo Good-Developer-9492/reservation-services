@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class PerformanceController {
     private final PerformanceService performanceService;
 
-    /**
-     * 공연 정보 등록
-     * -같은 시간 장소에 등록된 공여니 있으면 exception
-     * -등록된 공연 없으면 next
-     */
     @PostMapping
     public SingleResponse<CreatePerformanceResponse> create(@RequestBody CreatePerformanceRequest createPerformanceRequest) {
         CreatePerformance createPerformance =

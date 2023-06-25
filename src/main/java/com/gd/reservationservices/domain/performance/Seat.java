@@ -25,6 +25,10 @@ public class Seat extends BaseTimeEntity {
     protected Seat() {
     }
 
+    public Seat(Performance performance, String Location, Integer number) {
+        this(performance, Location, number, false);
+    }
+
     public Seat(Performance performance, String location, Integer number, Boolean isReserved) {
         this.performance = performance;
         this.location = location;
