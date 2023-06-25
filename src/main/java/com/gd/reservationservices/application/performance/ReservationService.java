@@ -14,6 +14,8 @@ import com.gd.reservationservices.infrastructure.performance.ReservationReposito
 import com.gd.reservationservices.infrastructure.performance.SeatRepository;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,5 +56,12 @@ public class ReservationService {
         );
 
         seat.reserve();
+    }
+
+    public Page<Reservation> getAllReservations(Long performanceId, Pageable pageable) {
+        Performance performance = performanceRepository.findById(performanceId)
+            .orElseThrow(PerformanceNotFoundException::new);
+
+        return reservationRepository.findAllByPerformance(performance, pageable);
     }
 }

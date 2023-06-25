@@ -7,3 +7,6 @@ Content-Type: application/json
   "seatLocation": A,
   "seatNumber": 1
 }
+
+### 예매 목록 조회
+GET http://localhost:8080/business/performances/1/reservations?page=1&perPage=10
