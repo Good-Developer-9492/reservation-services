@@ -23,8 +23,7 @@ public class PerformanceSeatGroups {
 
             for (int j = 1; j < size; j++) {
                 seats.add(
-                    new Seat(performance, location, j
-                    )
+                    new Seat(performance.getId(), location, j)
                 );
             }
         }

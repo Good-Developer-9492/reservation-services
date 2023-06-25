@@ -7,7 +7,6 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
 public record ReservationResponse(
     Long id,
     User user,
