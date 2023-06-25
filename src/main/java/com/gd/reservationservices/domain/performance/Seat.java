@@ -31,6 +31,10 @@ public class Seat extends BaseTimeEntity {
         this.isReserved = isReserved;
     }
 
+    public Seat(Long performanceId, String Location, Integer number) {
+        this(performanceId, Location, number, false);
+    }
+
     public Boolean isReserved() {
         return Boolean.TRUE.equals(this.isReserved);
     }
