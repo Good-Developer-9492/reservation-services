@@ -34,10 +34,10 @@ public class UserController {
         return new SingleResponse.Ok<>(searchUserResponse);
     }
 
-    @PutMapping()
-    public SingleResponse<UpdateUserResponse> update(@RequestBody UpdateUserRequest updateUserRequest) {
-        UpdateUser updateUser =
-            userService.update(updateUserRequest.toValue());
+    @PutMapping("/{id}")
+    public SingleResponse<UpdateUserResponse> update(@PathVariable Long id,
+                                                     @RequestBody UpdateUserRequest updateUserRequest) {
+        UpdateUser updateUser = userService.update(id, updateUserRequest.toValue());
 
         return new SingleResponse.Ok<>(
             new UpdateUserResponse(updateUser)

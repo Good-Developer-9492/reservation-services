@@ -34,8 +34,8 @@ public class UserService {
     }
 
     @Transactional
-    public UpdateUser update(UpdateUserCommend updateUserCommend) {
-        User user = userRepository.findById(updateUserCommend.id())
+    public UpdateUser update(Long userId, UpdateUserCommend updateUserCommend) {
+        User user = userRepository.findById(userId)
             .orElseThrow(UserNotFoundException::new);
 
         user.updateInformation(
