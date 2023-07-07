@@ -27,19 +27,36 @@ class ReservationServiceTest {
     public void 좌석_동시_접근() throws InterruptedException {
         ReservationCreateValue addReservationOfUser2 =
                 new ReservationCreateValue(2L, "A", 2);
-
         ReservationCreateValue addReservationOfUser3 =
                 new ReservationCreateValue(3L, "A", 2);
+        ReservationCreateValue addReservationOfUser4 =
+                new ReservationCreateValue(4L, "A", 2);
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
 
         executor.submit(() -> {
-            reservationService.createReservation(2L, addReservationOfUser2);
-            System.out.println("create reservation first user");
+            try {
+                reservationService.createReservation(2L, addReservationOfUser2);
+                System.out.println("====> create reservation first user");
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         });
         executor.submit(() -> {
-            reservationService.createReservation(2L, addReservationOfUser3);
-            System.out.println("create reservation second user");
+            try {
+                reservationService.createReservation(2L, addReservationOfUser3);
+                System.out.println("====> create reservation second user");
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        executor.submit(() -> {
+            try {
+                reservationService.createReservation(2L, addReservationOfUser4);
+                System.out.println("====> create reservation third user");
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         });
 
         executor.shutdown();
@@ -48,31 +65,20 @@ class ReservationServiceTest {
             System.out.println(LocalTime.now() + " All jobs are terminated");
         } else {
             System.out.println(LocalTime.now() + " some jobs are not terminated");
-
-            // 모든 Task를 강제 종료합니다.
             executor.shutdownNow();
         }
 
-        System.out.println("end");
+        Seat seat = seatRepository
+                .findByPerformanceIdAndLocationAndNumber(2L, "A", 2)
+                .orElseThrow(() -> new IllegalArgumentException("not found"));
+        int i = reservationRepository.countBySeat(seat);
+        System.out.println("========> reservation count is = " + i);
+        Assertions.assertEquals(1, i);
+    }
 
-//        int threadCount = 10;
-//        CountDownLatch latch = new CountDownLatch(threadCount);
-//
-//        for (int i = 0; i < threadCount; i++) {
-//            executor.submit(() -> {
-//                reservationService.createReservation(2L, reservationCreateValue);
-//            });
-//        }
-//
-//        latch.await();
+    @Test
+    void test() {
 
-        Seat seat =
-                seatRepository
-                        .findByPerformanceIdAndLocationAndNumber(2L, "A", 2)
-                        .orElseThrow(() -> new IllegalArgumentException("not found"));
-//        int i = reservationRepository.countBySeat(seat);
-
-//        Assertions.assertEquals(1, i);
     }
 
 }

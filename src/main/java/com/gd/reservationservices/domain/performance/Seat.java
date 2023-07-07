@@ -2,8 +2,10 @@ package com.gd.reservationservices.domain.performance;
 
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Seat extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

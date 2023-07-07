@@ -13,5 +13,5 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Page<Reservation> findAllByPerformance(Performance performance, Pageable pageable);
-//    int countBySeat(Seat seat);
+    int countBySeat(Seat seat);
 }
