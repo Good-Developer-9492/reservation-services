@@ -1,25 +1,24 @@
-package com.gd.reservationservices.presentation.payment.response;
+package com.gd.reservationservices.application.payment;
 
 import com.gd.reservationservices.domain.payment.Coupon;
-import com.gd.reservationservices.domain.performance.Performance;
 
 import java.time.LocalDateTime;
 
 public record SearchCouponResult(
         Long id,
-        Performance performance,
+        String performanceTitle,
         String code,
-        Coupon.Type type,
+        String type,
         Integer value,
         LocalDateTime usedAt,
         LocalDateTime expiredAt
-){
+) {
     public SearchCouponResult(Coupon coupon) {
         this(
                 coupon.getId(),
-                coupon.getPerformance(),
+                coupon.getPerformance().getTitle(),
                 coupon.getCode(),
-                coupon.getType(),
+                coupon.getType().toString(),
                 coupon.getValue(),
                 coupon.getUsedAt(),
                 coupon.getExpiredAt()

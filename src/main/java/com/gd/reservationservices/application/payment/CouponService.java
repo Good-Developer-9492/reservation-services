@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class CouponService {
     private final PerformanceRepository performanceRepository;
 
     @Transactional
-    public List<Coupon> create(CreateCouponValue command) {
+    public List<CreateCouponResult> create(CreateCouponValue command) {
         Performance performance = performanceRepository.findById(command.performanceId())
                 .orElseThrow(() -> new IllegalArgumentException("공연정보를 찾을 수 없습니다"));
 
@@ -36,12 +37,17 @@ public class CouponService {
             }
             coupons.add(coupon);
         }
-        return couponRepository.saveAll(coupons);
+        return couponRepository.saveAll(coupons)
+                .stream().map(CreateCouponResult::new)
+                .collect(Collectors.toList());
+
     }
 
-    public Coupon search(Long id) {
-        return couponRepository.findById(id).orElseThrow(() ->
+    public SearchCouponResult search(Long id) {
+        Coupon result = couponRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("쿠폰을 찾을 수 없습니다"));
+        return new SearchCouponResult(result);
+
     }
 
     @Transactional
