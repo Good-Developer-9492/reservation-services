@@ -1,14 +1,14 @@
 package com.gd.reservationservices.presentation.performance;
 
 import com.gd.reservationservices.application.performance.ReservationService;
+import com.gd.reservationservices.application.performance.dto.ReservationSearchListResult;
+import com.gd.reservationservices.application.performance.dto.ReservationSearchResult;
 import com.gd.reservationservices.common.request.PagingRequest;
 import com.gd.reservationservices.common.response.ListResponse;
 import com.gd.reservationservices.common.response.Paging;
 import com.gd.reservationservices.common.response.SingleResponse;
-import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.presentation.performance.response.ReservationResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,26 +22,28 @@ public class BusinessReservationController {
 
     @GetMapping("/{performanceId}/reservations")
     @ResponseStatus(HttpStatus.OK)
-    public ListResponse<ReservationResponse> getAllReservations(@PathVariable Long performanceId,
-                                                                PagingRequest pagingRequest) {
-        Page<Reservation> reservation = reservationService.getAllReservations(performanceId, pagingRequest.toPageable());
+    public ListResponse<ReservationResponse> searchAllBy(@PathVariable Long performanceId,
+                                                         PagingRequest pagingRequest) {
+        ReservationSearchListResult reservation = reservationService.searchAllBy(performanceId, pagingRequest.toPageable());
 
         return new ListResponse.Ok<>(
-            reservation.get().map(ReservationResponse::new).collect(Collectors.toList()),
+            reservation.reservations().stream()
+                .map(ReservationResponse::new)
+                .collect(Collectors.toList()),
             new Paging(
-                reservation.getTotalElements(),
-                reservation.getPageable().getPageNumber(),
-                reservation.getPageable().getPageSize(),
-                reservation.getTotalPages()
+                reservation.totalCount(),
+                reservation.currentPage(),
+                reservation.perPage(),
+                reservation.totalPage()
             )
         );
     }
 
     @GetMapping("/{performanceId}/reservations/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
-    public SingleResponse<ReservationResponse> getReservation(@PathVariable Long performanceId,
-                                                              @PathVariable Long reservationId) {
-        Reservation reservation = reservationService.getReservation(performanceId, reservationId);
+    public SingleResponse<ReservationResponse> searchBy(@PathVariable Long performanceId,
+                                                        @PathVariable Long reservationId) {
+        ReservationSearchResult reservation = reservationService.searchBy(performanceId, reservationId);
 
         return new SingleResponse.Ok<>(
             new ReservationResponse(reservation)

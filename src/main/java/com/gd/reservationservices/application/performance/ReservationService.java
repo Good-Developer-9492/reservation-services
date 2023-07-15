@@ -1,11 +1,9 @@
 package com.gd.reservationservices.application.performance;
 
 import com.gd.reservationservices.application.performance.dto.ReservationCreateValue;
-import com.gd.reservationservices.application.performance.exception.AlreadyReservedSeatException;
-import com.gd.reservationservices.application.performance.exception.PerformanceNotFoundException;
-import com.gd.reservationservices.application.performance.exception.ReservationNotFoundException;
-import com.gd.reservationservices.application.performance.exception.ReservationNotMatchedException;
-import com.gd.reservationservices.application.performance.exception.SeatNotFoundException;
+import com.gd.reservationservices.application.performance.dto.ReservationSearchListResult;
+import com.gd.reservationservices.application.performance.dto.ReservationSearchResult;
+import com.gd.reservationservices.application.performance.exception.*;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
@@ -16,7 +14,6 @@ import com.gd.reservationservices.infrastructure.performance.ReservationReposito
 import com.gd.reservationservices.infrastructure.performance.SeatRepository;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,9 +30,9 @@ public class ReservationService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createReservation(Long performanceId, ReservationCreateValue requestValue) {
+    public void create(Long performanceId, ReservationCreateValue requestValue) {
         Performance performance = performanceRepository.findById(performanceId)
-            .orElseThrow(PerformanceNotFoundException::new);
+            .orElseThrow(IllegalArgumentException::new);
 
         Seat seat = seatRepository.findByPerformanceIdAndLocationAndNumber(
             performanceId, requestValue.seatLocation(), requestValue.seatNumber()
@@ -60,14 +57,16 @@ public class ReservationService {
         seat.reserve();
     }
 
-    public Page<Reservation> getAllReservations(Long performanceId, Pageable pageable) {
+    public ReservationSearchListResult searchAllBy(Long performanceId, Pageable pageable) {
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(PerformanceNotFoundException::new);
 
-        return reservationRepository.findAllByPerformance(performance, pageable);
+        return new ReservationSearchListResult(
+            reservationRepository.findAllByPerformance(performance, pageable)
+        );
     }
 
-    public Reservation getReservation(Long performanceId, Long reservationId) {
+    public ReservationSearchResult searchBy(Long performanceId, Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId)
             .orElseThrow(ReservationNotFoundException::new);
 
@@ -75,6 +74,6 @@ public class ReservationService {
             throw new ReservationNotMatchedException();
         }
 
-        return reservation;
+        return new ReservationSearchResult(reservation);
     }
 }

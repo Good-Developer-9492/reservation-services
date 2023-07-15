@@ -15,9 +15,9 @@ public class CustomerReservationController {
 
     @PostMapping("/{performanceId}/reservations")
     @ResponseStatus(HttpStatus.OK)
-    public EmptyResponse createReservation(@PathVariable Long performanceId,
-                                           @RequestBody ReservationCreateRequest request) {
-        reservationService.createReservation(performanceId, request.toValue());
+    public EmptyResponse create(@PathVariable Long performanceId,
+                                @RequestBody ReservationCreateRequest request) {
+        reservationService.create(performanceId, request.toValue());
 
         return new EmptyResponse.Ok<>();
     }
