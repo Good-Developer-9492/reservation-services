@@ -19,9 +19,10 @@ import java.util.List;
 public class BusinessCouponController {
     private final CouponService couponService;
 
+    //todo 따닥 이슈 고민해보기
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ListResponse<Coupon> createCoupon(@RequestBody CreateCouponCreateRequest request) {
+    public ListResponse<Coupon> create(@RequestBody CreateCouponCreateRequest request) {
         List<Coupon> result = couponService.create(request.toValue());
         return new ListResponse.Ok<>(result, null);
     }
@@ -29,21 +30,21 @@ public class BusinessCouponController {
     //todo 추후에 id가 아닌 쿠폰번호로 조회하기
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public SingleResponse<Coupon> getCoupon(@PathVariable Long id) {
-        return new SingleResponse.Ok<>(couponService.findById(id));
+    public SingleResponse<Coupon> search(@PathVariable Long id) {
+        return new SingleResponse.Ok<>(couponService.search(id));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public EmptyResponse updateCoupon(@PathVariable Long id,
-                                      @RequestBody UpdateCouponRequest request) {
+    public EmptyResponse update(@PathVariable Long id,
+                                @RequestBody UpdateCouponRequest request) {
         couponService.update(request.toValue(id));
         return new EmptyResponse.Ok<>();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public EmptyResponse updateCoupon(@PathVariable Long id) {
+    public EmptyResponse delete(@PathVariable Long id) {
         couponService.delete(id);
         return new EmptyResponse.Ok<>();
     }
