@@ -26,7 +26,7 @@ public class UserService {
         userRepository.save(createUser.toEntity());
     }
 
-    public SearchUser searchUser(Long id) {
+    public SearchUser searchBy(Long id) {
         User user = userRepository.findById(id)
             .orElseThrow(UserNotFoundException::new);
 

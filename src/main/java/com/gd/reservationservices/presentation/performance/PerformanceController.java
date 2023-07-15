@@ -2,7 +2,7 @@ package com.gd.reservationservices.presentation.performance;
 
 import com.gd.reservationservices.application.performance.PerformanceService;
 import com.gd.reservationservices.application.performance.dto.CreatePerformance;
-import com.gd.reservationservices.application.performance.dto.FindPerformance;
+import com.gd.reservationservices.application.performance.dto.SearchPerformance;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.performance.request.CreatePerformanceRequest;
 import com.gd.reservationservices.presentation.performance.response.CreatePerformanceResponse;
@@ -26,11 +26,11 @@ public class PerformanceController {
     }
 
     @GetMapping("/business/{id}")
-    public SingleResponse<FindPerformanceResponse> find(@PathVariable Long id) {
-        FindPerformance findPerformance = performanceService.find(id);
+    public SingleResponse<FindPerformanceResponse> searchBy(@PathVariable Long id) {
+        SearchPerformance searchPerformance = performanceService.searchBy(id);
 
         return new SingleResponse.Ok<>(
-            new FindPerformanceResponse(findPerformance)
+            new FindPerformanceResponse(searchPerformance)
         );
     }
 }

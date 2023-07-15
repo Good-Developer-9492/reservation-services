@@ -26,8 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public SingleResponse<SearchUserResponse> searchUser(@PathVariable Long id) {
-        SearchUser searchUser = userService.searchUser(id);
+    public SingleResponse<SearchUserResponse> searchBy(@PathVariable Long id) {
+        SearchUser searchUser = userService.searchBy(id);
 
         SearchUserResponse searchUserResponse = new SearchUserResponse(searchUser);
 

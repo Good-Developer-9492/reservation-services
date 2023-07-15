@@ -6,7 +6,7 @@ import com.gd.reservationservices.infrastructure.performance.value.FilmRating;
 
 import java.time.LocalDateTime;
 
-public record FindPerformance(
+public record SearchPerformance(
     Long id,
     PerformancePlace place,
     Category category,
@@ -20,7 +20,7 @@ public record FindPerformance(
     String acting,
     FilmRating filmRating
 ) {
-    public FindPerformance(Performance performance, PerformancePlace place) {
+    public SearchPerformance(Performance performance, PerformancePlace place) {
         this(
             performance.getId(),
             place,
