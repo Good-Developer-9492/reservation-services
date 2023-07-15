@@ -1,8 +1,8 @@
 package com.gd.reservationservices.presentation.user;
 
 import com.gd.reservationservices.application.user.UserService;
-import com.gd.reservationservices.application.user.dto.SearchUser;
-import com.gd.reservationservices.application.user.dto.UpdateUser;
+import com.gd.reservationservices.application.user.dto.SearchUserResult;
+import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.common.response.EmptyResponse;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.user.reqeust.UpdateUserRequest;
@@ -27,9 +27,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public SingleResponse<SearchUserResponse> searchBy(@PathVariable Long id) {
-        SearchUser searchUser = userService.searchBy(id);
+        SearchUserResult searchUserResult = userService.searchBy(id);
 
-        SearchUserResponse searchUserResponse = new SearchUserResponse(searchUser);
+        SearchUserResponse searchUserResponse = new SearchUserResponse(searchUserResult);
 
         return new SingleResponse.Ok<>(searchUserResponse);
     }
@@ -37,10 +37,10 @@ public class UserController {
     @PutMapping("/{id}")
     public SingleResponse<UpdateUserResponse> update(@PathVariable Long id,
                                                      @RequestBody UpdateUserRequest updateUserRequest) {
-        UpdateUser updateUser = userService.update(id, updateUserRequest.toValue());
+        UpdateUserResult updateUserResult = userService.update(id, updateUserRequest.toValue());
 
         return new SingleResponse.Ok<>(
-            new UpdateUserResponse(updateUser)
+            new UpdateUserResponse(updateUserResult)
         );
     }
 }

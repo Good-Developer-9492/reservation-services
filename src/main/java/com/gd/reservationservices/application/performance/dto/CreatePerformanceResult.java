@@ -6,34 +6,34 @@ import com.gd.reservationservices.infrastructure.performance.value.FilmRating;
 
 import java.time.LocalDateTime;
 
-public record SearchPerformance(
-    Long id,
+public record CreatePerformanceResult(
     PerformancePlace place,
-    Category category,
     LocalDateTime startAt,
+    LocalDateTime endAt,
     LocalDateTime startReservationAt,
     LocalDateTime endReservationAt,
-    LocalDateTime createdAt,
-    LocalDateTime updatedAt,
+    Category category,
     String title,
     String content,
     String acting,
-    FilmRating filmRating
+    FilmRating filmRating,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt
 ) {
-    public SearchPerformance(Performance performance, PerformancePlace place) {
+    public CreatePerformanceResult(Performance performance, PerformancePlace place) {
         this(
-            performance.getId(),
             place,
-            Category.valueOf(performance.getCategory().toString()),
             performance.getStartAt(),
+            performance.getEndAt(),
             performance.getStartReservationAt(),
             performance.getEndReservationAt(),
-            performance.getCreatedAt(),
-            performance.getUpdatedAt(),
+            Category.valueOf(performance.getCategory().toString()),
             performance.getTitle(),
             performance.getContent(),
             performance.getActing(),
-            FilmRating.valueOf(performance.getFilmRating().toString())
+            FilmRating.valueOf(performance.getFilmRating().toString()),
+            performance.getCreatedAt(),
+            performance.getUpdatedAt()
         );
     }
 }

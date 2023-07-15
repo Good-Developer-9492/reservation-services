@@ -1,8 +1,8 @@
 package com.gd.reservationservices.application.performance;
 
-import com.gd.reservationservices.application.performance.dto.CreatePerformance;
+import com.gd.reservationservices.application.performance.dto.CreatePerformanceResult;
 import com.gd.reservationservices.application.performance.dto.CreatePerformanceValue;
-import com.gd.reservationservices.application.performance.dto.SearchPerformance;
+import com.gd.reservationservices.application.performance.dto.SearchPerformanceResult;
 import com.gd.reservationservices.application.performance.dto.PerformancePlace;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Place;
@@ -25,7 +25,7 @@ public class PerformanceService {
     private final SeatRepository seatRepository;
 
     @Transactional
-    public CreatePerformance create(CreatePerformanceValue createPerformanceValue) {
+    public CreatePerformanceResult create(CreatePerformanceValue createPerformanceValue) {
         if (performanceRepository.exists(
             createPerformanceValue.placeId(),
             createPerformanceValue.startAt(),
@@ -55,17 +55,17 @@ public class PerformanceService {
             performanceSeats.getSeats(newPerformance)
         );
 
-        return new CreatePerformance(
+        return new CreatePerformanceResult(
             newPerformance,
             new PerformancePlace(place)
         );
     }
 
-    public SearchPerformance searchBy(Long id) {
+    public SearchPerformanceResult searchBy(Long id) {
         Performance performance = performanceRepository.findPerformanceAndPlace(id)
             .orElseThrow(() -> new IllegalArgumentException("공연 정보가 존재하지 않습니다."));
 
-        return new SearchPerformance(
+        return new SearchPerformanceResult(
             performance,
             new PerformancePlace(performance.getPlace())
         );
