@@ -6,7 +6,7 @@ import com.gd.reservationservices.domain.payment.Coupon;
 
 import java.time.LocalDateTime;
 
-public record CreateCouponCreateRequest(
+public record CreateCouponRequest(
         Long performanceId,
         Coupon.Type type,
         Integer value,
