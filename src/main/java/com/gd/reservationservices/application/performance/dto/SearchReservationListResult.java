@@ -5,14 +5,14 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public record ReservationSearchListResult(
+public record SearchReservationListResult(
     List<Reservation> reservations,
     Long totalCount,
     Integer currentPage,
     Integer perPage,
     Integer totalPage
 ) {
-    public ReservationSearchListResult(Page<Reservation> reservations) {
+    public SearchReservationListResult(Page<Reservation> reservations) {
         this(
             reservations.getContent(),
             reservations.getTotalElements(),

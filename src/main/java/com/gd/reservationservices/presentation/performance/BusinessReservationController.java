@@ -1,13 +1,13 @@
 package com.gd.reservationservices.presentation.performance;
 
 import com.gd.reservationservices.application.performance.ReservationService;
-import com.gd.reservationservices.application.performance.dto.ReservationSearchListResult;
-import com.gd.reservationservices.application.performance.dto.ReservationSearchResult;
+import com.gd.reservationservices.application.performance.dto.SearchReservationListResult;
+import com.gd.reservationservices.application.performance.dto.SearchReservationResult;
 import com.gd.reservationservices.common.request.PagingRequest;
 import com.gd.reservationservices.common.response.ListResponse;
 import com.gd.reservationservices.common.response.Paging;
 import com.gd.reservationservices.common.response.SingleResponse;
-import com.gd.reservationservices.presentation.performance.response.ReservationResponse;
+import com.gd.reservationservices.presentation.performance.response.SearchReservationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +22,13 @@ public class BusinessReservationController {
 
     @GetMapping("/{performanceId}/reservations")
     @ResponseStatus(HttpStatus.OK)
-    public ListResponse<ReservationResponse> searchAllBy(@PathVariable Long performanceId,
-                                                         PagingRequest pagingRequest) {
-        ReservationSearchListResult reservation = reservationService.searchAllBy(performanceId, pagingRequest.toPageable());
+    public ListResponse<SearchReservationResponse> searchAllBy(@PathVariable Long performanceId,
+                                                               PagingRequest pagingRequest) {
+        SearchReservationListResult reservation = reservationService.searchAllBy(performanceId, pagingRequest.toPageable());
 
         return new ListResponse.Ok<>(
             reservation.reservations().stream()
-                .map(ReservationResponse::new)
+                .map(SearchReservationResponse::new)
                 .collect(Collectors.toList()),
             new Paging(
                 reservation.totalCount(),
@@ -41,12 +41,12 @@ public class BusinessReservationController {
 
     @GetMapping("/{performanceId}/reservations/{reservationId}")
     @ResponseStatus(HttpStatus.OK)
-    public SingleResponse<ReservationResponse> searchBy(@PathVariable Long performanceId,
-                                                        @PathVariable Long reservationId) {
-        ReservationSearchResult reservation = reservationService.searchBy(performanceId, reservationId);
+    public SingleResponse<SearchReservationResponse> searchBy(@PathVariable Long performanceId,
+                                                              @PathVariable Long reservationId) {
+        SearchReservationResult reservation = reservationService.searchBy(performanceId, reservationId);
 
         return new SingleResponse.Ok<>(
-            new ReservationResponse(reservation)
+            new SearchReservationResponse(reservation)
         );
     }
 }

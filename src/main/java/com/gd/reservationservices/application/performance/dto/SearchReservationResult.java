@@ -6,13 +6,13 @@ import com.gd.reservationservices.domain.user.User;
 
 import java.time.LocalDateTime;
 
-public record ReservationSearchResult (
+public record SearchReservationResult(
     Long id,
     User user,
     Seat seat,
     LocalDateTime reservedAt
 ) {
-    public ReservationSearchResult(Reservation reservation) {
+    public SearchReservationResult(Reservation reservation) {
         this(
             reservation.getId(),
             reservation.getUser(),

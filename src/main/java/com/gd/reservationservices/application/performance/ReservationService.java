@@ -1,8 +1,9 @@
 package com.gd.reservationservices.application.performance;
 
-import com.gd.reservationservices.application.performance.dto.ReservationCreateValue;
-import com.gd.reservationservices.application.performance.dto.ReservationSearchListResult;
-import com.gd.reservationservices.application.performance.dto.ReservationSearchResult;
+import com.gd.reservationservices.application.performance.dto.CreateReservationResult;
+import com.gd.reservationservices.application.performance.dto.CreateReservationValue;
+import com.gd.reservationservices.application.performance.dto.SearchReservationListResult;
+import com.gd.reservationservices.application.performance.dto.SearchReservationResult;
 import com.gd.reservationservices.application.performance.exception.*;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.performance.Performance;
@@ -30,7 +31,7 @@ public class ReservationService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void create(Long performanceId, ReservationCreateValue requestValue) {
+    public CreateReservationResult create(Long performanceId, CreateReservationValue requestValue) {
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(IllegalArgumentException::new);
 
@@ -43,9 +44,9 @@ public class ReservationService {
         }
 
         User user = userRepository.findById(requestValue.userId())
-                .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(UserNotFoundException::new);
 
-        reservationRepository.save(
+        Reservation reservation = reservationRepository.save(
             new Reservation(
                 user,
                 performance,
@@ -55,18 +56,20 @@ public class ReservationService {
         );
 
         seat.reserve();
+
+        return new CreateReservationResult(reservation);
     }
 
-    public ReservationSearchListResult searchAllBy(Long performanceId, Pageable pageable) {
+    public SearchReservationListResult searchAllBy(Long performanceId, Pageable pageable) {
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(PerformanceNotFoundException::new);
 
-        return new ReservationSearchListResult(
+        return new SearchReservationListResult(
             reservationRepository.findAllByPerformance(performance, pageable)
         );
     }
 
-    public ReservationSearchResult searchBy(Long performanceId, Long reservationId) {
+    public SearchReservationResult searchBy(Long performanceId, Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId)
             .orElseThrow(ReservationNotFoundException::new);
 
@@ -74,6 +77,6 @@ public class ReservationService {
             throw new ReservationNotMatchedException();
         }
 
-        return new ReservationSearchResult(reservation);
+        return new SearchReservationResult(reservation);
     }
 }
