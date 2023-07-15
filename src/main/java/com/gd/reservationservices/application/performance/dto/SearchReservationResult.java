@@ -1,19 +1,18 @@
-package com.gd.reservationservices.presentation.performance.response;
+package com.gd.reservationservices.application.performance.dto;
 
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.domain.performance.Seat;
 import com.gd.reservationservices.domain.user.User;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-public record ReservationResponse(
+public record SearchReservationResult(
     Long id,
     User user,
     Seat seat,
     LocalDateTime reservedAt
 ) {
-    public ReservationResponse(Reservation reservation) {
+    public SearchReservationResult(Reservation reservation) {
         this(
             reservation.getId(),
             reservation.getUser(),
