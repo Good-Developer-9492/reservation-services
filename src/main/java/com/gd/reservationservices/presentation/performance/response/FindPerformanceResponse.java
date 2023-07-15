@@ -1,6 +1,6 @@
 package com.gd.reservationservices.presentation.performance.response;
 
-import com.gd.reservationservices.application.performance.dto.FindPerformance;
+import com.gd.reservationservices.application.performance.dto.SearchPerformanceResult;
 import com.gd.reservationservices.application.performance.dto.PerformancePlace;
 import com.gd.reservationservices.infrastructure.performance.value.Category;
 import com.gd.reservationservices.infrastructure.performance.value.FilmRating;
@@ -21,20 +21,20 @@ public record FindPerformanceResponse(
     String acting,
     FilmRating filmRating
 ) {
-    public FindPerformanceResponse(FindPerformance findPerformance) {
+    public FindPerformanceResponse(SearchPerformanceResult searchPerformanceResult) {
         this(
-            findPerformance.id(),
-            findPerformance.place(),
-            findPerformance.category(),
-            findPerformance.startAt(),
-            findPerformance.startReservationAt(),
-            findPerformance.endReservationAt(),
-            findPerformance.createdAt(),
-            findPerformance.updatedAt(),
-            findPerformance.title(),
-            findPerformance.content(),
-            findPerformance.acting(),
-            findPerformance.filmRating()
+            searchPerformanceResult.id(),
+            searchPerformanceResult.place(),
+            searchPerformanceResult.category(),
+            searchPerformanceResult.startAt(),
+            searchPerformanceResult.startReservationAt(),
+            searchPerformanceResult.endReservationAt(),
+            searchPerformanceResult.createdAt(),
+            searchPerformanceResult.updatedAt(),
+            searchPerformanceResult.title(),
+            searchPerformanceResult.content(),
+            searchPerformanceResult.acting(),
+            searchPerformanceResult.filmRating()
         );
     }
 }

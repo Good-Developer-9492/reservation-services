@@ -1,8 +1,8 @@
 package com.gd.reservationservices.application.user;
 
 import com.gd.reservationservices.application.user.command.CreateUser;
-import com.gd.reservationservices.application.user.dto.SearchUser;
-import com.gd.reservationservices.application.user.dto.UpdateUser;
+import com.gd.reservationservices.application.user.dto.SearchUserResult;
+import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.user.User;
@@ -26,15 +26,15 @@ public class UserService {
         userRepository.save(createUser.toEntity());
     }
 
-    public SearchUser searchUser(Long id) {
+    public SearchUserResult searchBy(Long id) {
         User user = userRepository.findById(id)
             .orElseThrow(UserNotFoundException::new);
 
-        return new SearchUser(user);
+        return new SearchUserResult(user);
     }
 
     @Transactional
-    public UpdateUser update(Long userId, UpdateUserCommend updateUserCommend) {
+    public UpdateUserResult update(Long userId, UpdateUserCommend updateUserCommend) {
         User user = userRepository.findById(userId)
             .orElseThrow(UserNotFoundException::new);
 
@@ -44,6 +44,6 @@ public class UserService {
             updateUserCommend.age()
         );
 
-        return new UpdateUser(user);
+        return new UpdateUserResult(user);
     }
 }

@@ -1,6 +1,6 @@
 package com.gd.reservationservices.presentation.user.response;
 
-import com.gd.reservationservices.application.user.dto.UpdateUser;
+import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.domain.user.Role;
 
 public record UpdateUserResponse(
@@ -11,14 +11,14 @@ public record UpdateUserResponse(
     String phone,
     Role role
 ) {
-    public UpdateUserResponse(UpdateUser updateUser) {
+    public UpdateUserResponse(UpdateUserResult updateUserResult) {
         this(
-            updateUser.userId(),
-            updateUser.name(),
-            updateUser.age(),
-            updateUser.email(),
-            updateUser.phone(),
-            updateUser.role()
+            updateUserResult.userId(),
+            updateUserResult.name(),
+            updateUserResult.age(),
+            updateUserResult.email(),
+            updateUserResult.phone(),
+            updateUserResult.role()
         );
     }
 }
