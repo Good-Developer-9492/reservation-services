@@ -11,6 +11,15 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      lettuce:
+        pool:
+          min-idle: 0
+          max-idle: 8
+          max-active: 8
 
 logging:
   level:
