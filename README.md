@@ -7,6 +7,9 @@
 ```bash
  docker run --name gd-mysql -e MYSQL_DATABASE=reservation -e MYSQL_ROOT_PASSWORD=1234 -d -p 3306:3306 mysql:latest
 ```
+```bash
+ docker run -p 6379:6379 redis -p 6379:6379
+```
 
 ## Project Convention
 
