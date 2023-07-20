@@ -7,10 +7,20 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none #create-drop, update, validate, none
+      ddl-auto: update #create-drop, update, validate, none
     properties:
       hibernate:
         format_sql: true
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      lettuce:
+        pool:
+          min-idle: 0
+          max-idle: 8
+          max-active: 8
 
 logging:
   level:
@@ -18,4 +28,7 @@ logging:
     org.hibernate.type: trace
 server:
   port: 8080
+
+
+
 
