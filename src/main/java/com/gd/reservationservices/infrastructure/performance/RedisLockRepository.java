@@ -15,9 +15,9 @@ public class RedisLockRepository implements LockRepository {
     }
 
     @Override
-    public Boolean lock(Long key) {
+    public Boolean lock(String key) {
         return redisTemplate.opsForValue()
-                .setIfAbsent(String.valueOf(key), "Lock", Duration.ofMillis(3000));
+                .setIfAbsent(key, "Lock");
     }
 
     @Override
