@@ -5,8 +5,9 @@ import com.gd.reservationservices.application.performance.exception.AlreadyReser
 import com.gd.reservationservices.application.performance.exception.PerformanceNotFoundException;
 import com.gd.reservationservices.application.performance.exception.ReservationNotFoundException;
 import com.gd.reservationservices.application.performance.exception.ReservationNotMatchedException;
-import com.gd.reservationservices.application.performance.exception.SeatNotFoundException;
+import com.gd.reservationservices.application.performance.value.LockKey;
 import com.gd.reservationservices.application.user.exception.UserNotFoundException;
+import com.gd.reservationservices.domain.performance.LockRepository;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.domain.performance.Seat;
@@ -16,6 +17,7 @@ import com.gd.reservationservices.infrastructure.performance.ReservationReposito
 import com.gd.reservationservices.infrastructure.performance.SeatRepository;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,25 +27,31 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class ReservationService {
     private final PerformanceRepository performanceRepository;
     private final ReservationRepository reservationRepository;
     private final SeatRepository seatRepository;
     private final UserRepository userRepository;
+    private final LockRepository lockRepository;
 
     @Transactional
     public void createReservation(Long performanceId, ReservationCreateValue requestValue) {
+        LockKey lockKey = new LockKey(
+                performanceId, requestValue.seatLocation(), requestValue.seatNumber()
+        );
+
+        if (!lockRepository.lock(lockKey.combination())){
+            throw new AlreadyReservedSeatException();
+        }
+
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(PerformanceNotFoundException::new);
 
         Seat seat = seatRepository.findByPerformanceIdAndLocationAndNumber(
             performanceId, requestValue.seatLocation(), requestValue.seatNumber()
-        ).orElseThrow(SeatNotFoundException::new);
-
-        if (seat.isReserved()) {
-            throw new AlreadyReservedSeatException();
-        }
+        ).orElseThrow(() -> new IllegalArgumentException("not found data"));
 
         User user = userRepository.findById(requestValue.userId())
                 .orElseThrow(UserNotFoundException::new);
