@@ -18,6 +18,7 @@ import com.gd.reservationservices.infrastructure.performance.SeatRepository;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class ReservationService {
     private final SeatRepository seatRepository;
     private final UserRepository userRepository;
     private final LockRepository lockRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public void createReservation(Long performanceId, ReservationCreateValue requestValue) {
@@ -45,6 +47,7 @@ public class ReservationService {
         if (!lockRepository.lock(lockKey.combination())){
             throw new AlreadyReservedSeatException();
         }
+        eventPublisher.publishEvent(lockKey.combination());
 
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(PerformanceNotFoundException::new);
@@ -52,6 +55,10 @@ public class ReservationService {
         Seat seat = seatRepository.findByPerformanceIdAndLocationAndNumber(
             performanceId, requestValue.seatLocation(), requestValue.seatNumber()
         ).orElseThrow(() -> new IllegalArgumentException("not found data"));
+
+        if (seat.isReserved()) {
+            throw new AlreadyReservedSeatException();
+        }
 
         User user = userRepository.findById(requestValue.userId())
                 .orElseThrow(UserNotFoundException::new);

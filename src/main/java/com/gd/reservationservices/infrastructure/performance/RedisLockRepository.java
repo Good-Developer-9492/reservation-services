@@ -4,8 +4,6 @@ import com.gd.reservationservices.domain.performance.LockRepository;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
-
 @Repository
 public class RedisLockRepository implements LockRepository {
     private final RedisTemplate<String, String> redisTemplate;
@@ -21,7 +19,7 @@ public class RedisLockRepository implements LockRepository {
     }
 
     @Override
-    public Boolean unlock(Long key) {
+    public Boolean unlock(String key) {
         return redisTemplate.delete(String.valueOf(key));
     }
 
