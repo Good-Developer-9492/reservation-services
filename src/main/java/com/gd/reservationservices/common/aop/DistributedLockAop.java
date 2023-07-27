@@ -15,11 +15,11 @@ import java.lang.reflect.Method;
 @Component
 @Slf4j
 public class DistributedLockAop {
-    private static final String REDISSON_LOCK_PREFIX = "LOCK";
     private final RedissonClient redissonClient;
     private final AopForTransaction aopForTransaction;
 
-    public DistributedLockAop(RedissonClient redissonClient, AopForTransaction aopForTransaction) {
+    public DistributedLockAop(RedissonClient redissonClient,
+                              AopForTransaction aopForTransaction) {
         this.redissonClient = redissonClient;
         this.aopForTransaction = aopForTransaction;
     }
@@ -30,21 +30,28 @@ public class DistributedLockAop {
         Method method = signature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
 
-        String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
-        RLock rLock = redissonClient.getLock(key);  // (1)
+        String key = String.valueOf(
+                CustomSpringELParser.getDynamicValue(
+                        signature.getParameterNames(),
+                        joinPoint.getArgs(),
+                        distributedLock.key()
+                )
+        );
 
+        RLock lock = redissonClient.getLock(key);
         try {
-            boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());  // (2)
+            boolean available =
+                    lock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());
             if (!available) {
                 return false;
             }
 
-            return aopForTransaction.proceed(joinPoint);  // (3)
+            return aopForTransaction.proceed(joinPoint);
         } catch (InterruptedException e) {
             throw new InterruptedException();
         } finally {
             try {
-                rLock.unlock();   // (4)
+                lock.unlock();
             } catch (IllegalMonitorStateException e) {
                 log.info("Redisson Lock Already UnLock {} {}", method.getName(), key);
             }

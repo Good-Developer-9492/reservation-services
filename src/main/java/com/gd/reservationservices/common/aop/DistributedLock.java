@@ -10,16 +10,18 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedLock {
     String key();
+
     TimeUnit timeUnit() default TimeUnit.SECONDS;
+
     /**
-     * 락을 기다리는 시간 (default - 5s)
-     * 락 획득을 위해 waitTime 만큼 대기한다
+     * 락을 기다리는 시간
+     * 락 획득을 위해 waitTime 만큼 대기
      */
     long waitTime() default 5L;
 
     /**
-     * 락 임대 시간 (default - 3s)
-     * 락을 획득한 이후 leaseTime 이 지나면 락을 해제한다
+     * 락 소유 시간
+     * 락을 획득한 이후 leaseTime 이 지나면 락을 해제
      */
-    long leaseTime() default 3L;
+    long leaseTime() default 1L;
 }

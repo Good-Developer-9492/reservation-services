@@ -28,4 +28,11 @@ public class Place extends BaseTimeEntity {
         this.location = location;
         this.maxSeat = maxSeat;
     }
+
+    public Integer decrease() {
+        if (maxSeat == 0) {
+            throw new IllegalArgumentException("0입니다.");
+        }
+        return maxSeat --;
+    }
 }
