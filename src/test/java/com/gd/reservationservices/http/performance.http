@@ -29,10 +29,6 @@ Content-Type: application/json
     {
       "location": "D",
       "seatCount": 100
-    },
-    {
-      "location": "C",
-      "seatCount": 100
     }
   ]
 }

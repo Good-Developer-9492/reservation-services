@@ -1,6 +1,6 @@
 package com.gd.reservationservices.application.user.dto;
 
-public record UpdateUserCommend(
+public record UpdateUserValue(
         String userPw,
         String name,
         int age
