@@ -1,4 +1,4 @@
-package com.gd.reservationservices.infrastructure.payment;
+package com.gd.reservationservices.domain.payment.repository;
 
 import com.gd.reservationservices.domain.payment.Coupon;
 import com.gd.reservationservices.infrastructure.payment.custom.CouponRepositoryCustom;

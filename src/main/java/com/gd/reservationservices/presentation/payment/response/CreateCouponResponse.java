@@ -1,8 +1,6 @@
 package com.gd.reservationservices.presentation.payment.response;
 
-import com.gd.reservationservices.application.payment.CreateCouponResult;
-import com.gd.reservationservices.domain.payment.Coupon;
-import com.gd.reservationservices.domain.performance.Performance;
+import com.gd.reservationservices.application.payment.dto.CreateCouponResult;
 
 import java.time.LocalDateTime;
 
