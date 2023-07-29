@@ -1,7 +1,7 @@
 package com.gd.reservationservices.common.response;
 
 
-import com.gd.reservationservices.common.exception.ErrorCodeException;
+import com.gd.reservationservices.common.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
@@ -12,10 +12,8 @@ public class ErrorResponse {
         this.meta = new Meta.Fail(errorCode, errorMessage);
     }
 
-    public ErrorResponse(ErrorCodeException e) {
-        this(
-            e.getKey(),
-            e.getMessage()
-        );
+    public static ErrorResponse of(String errorCodeName) {
+        ErrorCode errorCode = ErrorCode.valueOf(errorCodeName);
+        return new ErrorResponse(errorCode.getKey(), errorCode.getMessage());
     }
 }

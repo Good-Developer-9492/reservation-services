@@ -2,11 +2,12 @@ package com.gd.reservationservices.application.performance;
 
 import com.gd.reservationservices.application.performance.dto.CreatePerformanceResult;
 import com.gd.reservationservices.application.performance.dto.CreatePerformanceValue;
-import com.gd.reservationservices.application.performance.dto.SearchPerformanceResult;
 import com.gd.reservationservices.application.performance.dto.PerformancePlace;
+import com.gd.reservationservices.application.performance.dto.SearchPerformanceResult;
+import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.performance.Performance;
-import com.gd.reservationservices.domain.performance.Place;
 import com.gd.reservationservices.domain.performance.PerformanceSeatGroups;
+import com.gd.reservationservices.domain.performance.Place;
 import com.gd.reservationservices.domain.performance.repository.PerformanceRepository;
 import com.gd.reservationservices.domain.performance.repository.PlaceRepository;
 import com.gd.reservationservices.domain.performance.repository.SeatRepository;
@@ -31,11 +32,11 @@ public class PerformanceService {
             createPerformanceValue.startAt(),
             createPerformanceValue.endAt())
         ) {
-            throw new IllegalArgumentException("해당 시간에 공연을 등록할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_AVAILABLE_DATETIME.name());
         }
 
         Place place = placeRepository.findById(createPerformanceValue.placeId())
-            .orElseThrow(() -> new IllegalArgumentException("공연장 정보가 존재하지 않습니다."));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PLACE_NOT_FOUND.name()));
 
         PerformanceSeatGroups performanceSeats =
             new PerformanceSeatGroups(
@@ -45,7 +46,7 @@ public class PerformanceService {
             );
 
         if (performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
-            throw new IllegalArgumentException("등록 좌석 정보가 공연장 최대 좌석 수를 초과하였습니다.");
+            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_EXCEED_MAX_SEAT_ON_PLACE.name());
         }
 
         Performance newPerformance = createPerformanceValue.toEntity(place);
@@ -63,7 +64,7 @@ public class PerformanceService {
 
     public SearchPerformanceResult searchBy(Long id) {
         Performance performance = performanceRepository.findPerformanceAndPlace(id)
-            .orElseThrow(() -> new IllegalArgumentException("공연 정보가 존재하지 않습니다."));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
 
         return new SearchPerformanceResult(
             performance,
