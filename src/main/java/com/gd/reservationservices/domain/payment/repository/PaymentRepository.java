@@ -1,4 +1,4 @@
-package com.gd.reservationservices.infrastructure.payment;
+package com.gd.reservationservices.domain.payment.repository;
 
 import com.gd.reservationservices.domain.payment.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;

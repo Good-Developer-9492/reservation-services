@@ -1,4 +1,4 @@
-package com.gd.reservationservices.infrastructure.performance;
+package com.gd.reservationservices.domain.performance.repository;
 
 import com.gd.reservationservices.domain.performance.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
