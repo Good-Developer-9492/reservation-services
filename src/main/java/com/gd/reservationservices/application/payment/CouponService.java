@@ -23,7 +23,7 @@ public class CouponService {
     @Transactional
     public List<CreateCouponResult> create(CreateCouponValue command) {
         Performance performance = performanceRepository.findById(command.performanceId())
-                .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
 
         List<Coupon> coupons = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class CouponService {
                     command.value(),
                     command.expiredAt());
             if (coupon.isOverPrice(command.value())) {
-                throw new IllegalArgumentException(ErrorCode.COUPON_DISCOUNT_NOT_AVAILABLE_EXCEED_PERFORMANCE_PRICE.getMessage());
+                throw new IllegalArgumentException(ErrorCode.COUPON_DISCOUNT_NOT_AVAILABLE_EXCEED_PERFORMANCE_PRICE.name());
             }
             coupons.add(coupon);
         }
@@ -46,7 +46,7 @@ public class CouponService {
 
     public SearchCouponResult search(Long id) {
         Coupon result = couponRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.getMessage()));
+                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.name()));
         return new SearchCouponResult(result);
 
     }
@@ -54,10 +54,10 @@ public class CouponService {
     @Transactional
     public void update(UpdateCouponValue value) {
         Coupon coupon = couponRepository.findById(value.id()).orElseThrow(() ->
-                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.getMessage()));
+                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.name()));
 
         Performance performance = performanceRepository.findById(value.performanceId())
-                .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
 
         couponRepository.save(coupon.update(performance, value.type(), value.value(), value.expiredAt()));
     }
@@ -65,7 +65,7 @@ public class CouponService {
     @Transactional
     public void use(Long id) {
         Coupon coupon = couponRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.getMessage()));
+                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.name()));
 
         couponRepository.save(coupon.use());
     }
@@ -73,7 +73,7 @@ public class CouponService {
     @Transactional
     public void delete(Long id) {
         Coupon coupon = couponRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.getMessage()));
+                new IllegalArgumentException(ErrorCode.COUPON_NOT_FOUND.name()));
         couponRepository.save(coupon.delete());
     }
 }

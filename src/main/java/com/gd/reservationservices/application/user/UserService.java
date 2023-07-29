@@ -20,7 +20,7 @@ public class UserService {
     @Transactional
     public void joinBusinessUser(CreateUser createUser) {
         if (userRepository.exists(createUser.userId())) {
-            throw new IllegalArgumentException(ErrorCode.ALREADY_REGISTERED_USER.getMessage());
+            throw new IllegalArgumentException(ErrorCode.ALREADY_REGISTERED_USER.name());
         }
 
         userRepository.save(createUser.toEntity());
@@ -28,7 +28,7 @@ public class UserService {
 
     public SearchUserResult searchBy(Long id) {
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.getMessage()));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.name()));
 
         return new SearchUserResult(user);
     }
@@ -36,7 +36,7 @@ public class UserService {
     @Transactional
     public UpdateUserResult update(Long userId, UpdateUserCommend updateUserCommend) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.getMessage()));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.name()));
 
         user.updateInformation(
             updateUserCommend.userPw(),

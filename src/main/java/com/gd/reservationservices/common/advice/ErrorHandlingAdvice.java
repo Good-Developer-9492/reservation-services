@@ -13,6 +13,6 @@ public class ErrorHandlingAdvice {
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse badRequest(IllegalArgumentException e) {
-        return new ErrorResponse("bad request", e.getMessage());
+        return ErrorResponse.of(e.getMessage());
     }
 }

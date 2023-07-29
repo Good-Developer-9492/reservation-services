@@ -32,11 +32,11 @@ public class PerformanceService {
             createPerformanceValue.startAt(),
             createPerformanceValue.endAt())
         ) {
-            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_AVAILABLE_DATETIME.getMessage());
+            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_AVAILABLE_DATETIME.name());
         }
 
         Place place = placeRepository.findById(createPerformanceValue.placeId())
-            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PLACE_NOT_FOUND.getMessage()));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PLACE_NOT_FOUND.name()));
 
         PerformanceSeatGroups performanceSeats =
             new PerformanceSeatGroups(
@@ -46,7 +46,7 @@ public class PerformanceService {
             );
 
         if (performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
-            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_EXCEED_MAX_SEAT_ON_PLACE.getMessage());
+            throw new IllegalArgumentException(ErrorCode.PERFORMANCE_EXCEED_MAX_SEAT_ON_PLACE.name());
         }
 
         Performance newPerformance = createPerformanceValue.toEntity(place);
@@ -64,7 +64,7 @@ public class PerformanceService {
 
     public SearchPerformanceResult searchBy(Long id) {
         Performance performance = performanceRepository.findPerformanceAndPlace(id)
-            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.getMessage()));
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
 
         return new SearchPerformanceResult(
             performance,
