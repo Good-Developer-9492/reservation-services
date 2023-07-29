@@ -2,12 +2,9 @@ package com.gd.reservationservices.application.user;
 
 import com.gd.reservationservices.application.user.command.CreateUser;
 import com.gd.reservationservices.application.user.dto.SearchUserResult;
-import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
-import com.gd.reservationservices.application.user.dto.UpdateUserResult;
-import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.application.user.dto.UpdateUserValue;
-import com.gd.reservationservices.application.user.exception.UserNotFoundException;
+import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
