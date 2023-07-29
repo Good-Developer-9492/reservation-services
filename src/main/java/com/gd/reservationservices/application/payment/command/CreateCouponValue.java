@@ -1,4 +1,4 @@
-package com.gd.reservationservices.application.payment;
+package com.gd.reservationservices.application.payment.command;
 
 import com.gd.reservationservices.domain.payment.Coupon;
 

@@ -21,7 +21,7 @@ public class PerformanceSeatGroups {
             String location = seatInfo.location();
             int size = seatInfo.seatCount();
 
-            for (int j = 1; j < size; j++) {
+            for (int j = 1; j <= size; j++) {
                 seats.add(
                     new Seat(performance.getId(), location, j)
                 );

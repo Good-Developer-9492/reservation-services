@@ -1,15 +1,13 @@
 package com.gd.reservationservices.application.performance.dto;
 
 import com.gd.reservationservices.domain.performance.Performance;
-import com.gd.reservationservices.infrastructure.performance.value.Category;
-import com.gd.reservationservices.infrastructure.performance.value.FilmRating;
 
 import java.time.LocalDateTime;
 
 public record SearchPerformanceResult(
     Long id,
     PerformancePlace place,
-    Category category,
+    String category,
     LocalDateTime startAt,
     LocalDateTime startReservationAt,
     LocalDateTime endReservationAt,
@@ -18,13 +16,13 @@ public record SearchPerformanceResult(
     String title,
     String content,
     String acting,
-    FilmRating filmRating
+    String filmRating
 ) {
     public SearchPerformanceResult(Performance performance, PerformancePlace place) {
         this(
             performance.getId(),
             place,
-            Category.valueOf(performance.getCategory().toString()),
+            performance.getCategory().toString(),
             performance.getStartAt(),
             performance.getStartReservationAt(),
             performance.getEndReservationAt(),
@@ -33,7 +31,7 @@ public record SearchPerformanceResult(
             performance.getTitle(),
             performance.getContent(),
             performance.getActing(),
-            FilmRating.valueOf(performance.getFilmRating().toString())
+            performance.getFilmRating().toString()
         );
     }
 }

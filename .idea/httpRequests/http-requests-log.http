@@ -1,0 +1,1202 @@
+GET http://localhost:8080/users/3
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-07-29T141749.200.json
+
+###
+
+GET http://localhost:8080/users/18
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-07-29T141739.404.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-07-29T141729.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 165
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "user18",
+  "userPw": "user123456789",
+  "name": "user18",
+  "age": 18,
+  "email": "user18@email.com",
+  "phone": "01012345678",
+  "role": "BUSINESS"
+}
+
+<> 2023-07-29T141719.200.json
+
+###
+
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+Content-Length: 66
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userPw": "user123456789",
+  "name": "new name",
+  "age": 19
+}
+
+<> 2023-07-05T225505.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 563
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-26 12:00:00",
+  "endAt": "2023-07-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-07-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T215144.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 562
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-26 12:00:00",
+  "endAt": "2023-07-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-07-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 50
+    }
+  ]
+}
+
+<> 2023-06-30T214929.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 562
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-26 12:00:00",
+  "endAt": "2023-07-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-07-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 50
+    }
+  ]
+}
+
+<> 2023-06-30T214845.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 563
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-26 12:00:00",
+  "endAt": "2023-07-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-07-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214822.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 568
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-20 12:00:00",
+  "endAt": "2023-07-20 14:00:00",
+  "startReservationAt": "2023-60-20 00:00:00",
+  "endReservationAt": "2023-07-19 23:59:59",
+  "title": "태권vVV",
+  "content": "지구를 지킨다.???",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214745.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 568
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-20 12:00:00",
+  "endAt": "2023-07-20 14:00:00",
+  "startReservationAt": "2023-60-20 00:00:00",
+  "endReservationAt": "2023-07-19 23:59:59",
+  "title": "태권vVV",
+  "content": "지구를 지킨다.???",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214719.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 622
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-06-26 12:00:00",
+  "endAt": "2023-06-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214551.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 568
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-20 12:00:00",
+  "endAt": "2023-07-20 14:00:00",
+  "startReservationAt": "2023-60-20 00:00:00",
+  "endReservationAt": "2023-07-19 23:59:59",
+  "title": "태권vVV",
+  "content": "지구를 지킨다.???",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214510.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 568
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-07-20 12:00:00",
+  "endAt": "2023-07-20 14:00:00",
+  "startReservationAt": "2023-60-20 00:00:00",
+  "endReservationAt": "2023-07-19 23:59:59",
+  "title": "태권vVV",
+  "content": "지구를 지킨다.???",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-30T214445.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 622
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 3,
+  "category": "MUSICAL",
+  "startAt": "2023-06-26 12:00:00",
+  "endAt": "2023-06-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 101
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-24T172429.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 563
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 2,
+  "category": "MUSICAL",
+  "startAt": "2023-06-26 12:00:00",
+  "endAt": "2023-06-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 101
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-24T172313.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 563
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-06-26 12:00:00",
+  "endAt": "2023-06-26 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-25 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL",
+  "seats": [
+    {
+      "location": "A",
+      "seatCount": 100
+    },
+    {
+      "location": "B",
+      "seatCount": 100
+    },
+    {
+      "location": "C",
+      "seatCount": 100
+    },
+    {
+      "location": "D",
+      "seatCount": 100
+    }
+  ]
+}
+
+<> 2023-06-24T172220.200.json
+
+###
+
+GET http://localhost:8080/performance/business/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T155652.200.json
+
+###
+
+GET http://localhost:8080/performance/business/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T155454.200.json
+
+###
+
+GET http://localhost:8080/performance/business/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T155423.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 328
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 4,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 12:00:00",
+  "endAt": "2023-06-25 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "price": 50000,
+  "filmRating": "ALL"
+}
+
+<> 2023-06-23T232541.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 328
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 1,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 12:00:00",
+  "endAt": "2023-06-25 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "price": 50000,
+  "filmRating": "ALL"
+}
+
+<> 2023-06-23T232528.400.json
+
+###
+
+GET http://localhost:8080/performance/business/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-21T000610.200.json
+
+###
+
+GET http://localhost:8080/performance/business/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T233551.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 310
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 3,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 12:00:00",
+  "endAt": "2023-06-25 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-20T224845.200.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 310
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 2,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 12:00:00",
+  "endAt": "2023-06-25 14:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v",
+  "content": "지구를 지킨다.",
+  "acting": "로봇1",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-20T224810.400.json
+
+###
+
+GET http://localhost:8080/users/9999999999
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T224751.404.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T224746.200.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T222440.200.json
+
+###
+
+PUT http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 82
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": "1",
+  "userPw": "user123456789",
+  "name": "change name",
+  "age": 31
+}
+
+<> 2023-06-20T222438.200.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T222429.200.json
+
+###
+
+GET http://localhost:8080/users/9999999999
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T222425.500.json
+
+###
+
+PUT http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 82
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": "1",
+  "userPw": "user123456789",
+  "name": "change name",
+  "age": 19
+}
+
+<> 2023-06-20T222207.200.json
+
+###
+
+GET http://localhost:8080/users/9999999999
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T222159.500.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T222154.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 167
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "user04",
+  "userPw": "user123456789",
+  "name": "user name4",
+  "age": 28,
+  "email": "user@emai4.com",
+  "phone": "01012345678",
+  "role": "BUSINESS"
+}
+
+<> 2023-06-20T220242.200.json
+
+###
+
+GET http://localhost:8080/users/9999999999
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T220218.500.json
+
+###
+
+GET http://localhost:8080/users/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T220214.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 167
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "user01",
+  "userPw": "user123456789",
+  "name": "user name1",
+  "age": 18,
+  "email": "user@email.com",
+  "phone": "01012345678",
+  "role": "BUSINESS"
+}
+
+<> 2023-06-20T213317.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 167
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=88406C08784F4DE3F7DAFB8FAE5369FA
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "user03",
+  "userPw": "user123456789",
+  "name": "user name3",
+  "age": 18,
+  "email": "user@email.com",
+  "phone": "01083862997",
+  "role": "CUSTOMER"
+}
+
+<> 2023-06-19T223956.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 167
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "user03",
+  "userPw": "user123456789",
+  "name": "user name3",
+  "age": 18,
+  "email": "user@email.com",
+  "phone": "01083862997",
+  "role": "CUSTOMER"
+}
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T220455.400.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T220420.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T220332.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215935.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215654.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215530.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 313
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 18,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215306.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 312
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 2,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 16:00:00",
+  "endAt": "2023-06-25 19:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215224.500.json
+
+###
+
+POST http://localhost:8080/performance
+Content-Type: application/json
+Content-Length: 312
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=504443E2FDFB326DBA958AB38586552F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "placeId": 2,
+  "category": "MUSICAL",
+  "startAt": "2023-06-25 15:00:00",
+  "endAt": "2023-06-25 17:00:00",
+  "startReservationAt": "2023-06-20 00:00:00",
+  "endReservationAt": "2023-06-24 23:59:59",
+  "title": "태권v2",
+  "content": "지구를 지킨다.2",
+  "acting": "로봇2",
+  "filmRating": "ALL"
+}
+
+<> 2023-06-19T215210.200.json
+
+###
+

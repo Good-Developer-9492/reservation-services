@@ -5,8 +5,11 @@ import com.gd.reservationservices.application.user.dto.SearchUserResult;
 import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
 import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.common.exception.ErrorCode;
+import com.gd.reservationservices.application.user.dto.UpdateUserResult;
+import com.gd.reservationservices.application.user.dto.UpdateUserValue;
+import com.gd.reservationservices.application.user.exception.UserNotFoundException;
 import com.gd.reservationservices.domain.user.User;
-import com.gd.reservationservices.infrastructure.user.UserRepository;
+import com.gd.reservationservices.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,14 +37,14 @@ public class UserService {
     }
 
     @Transactional
-    public UpdateUserResult update(Long userId, UpdateUserCommend updateUserCommend) {
+    public UpdateUserResult update(Long userId, UpdateUserValue updateUserValue) {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.name()));
 
         user.updateInformation(
-            updateUserCommend.userPw(),
-            updateUserCommend.name(),
-            updateUserCommend.age()
+            updateUserValue.userPw(),
+            updateUserValue.name(),
+            updateUserValue.age()
         );
 
         return new UpdateUserResult(user);

@@ -1,10 +1,14 @@
 package com.gd.reservationservices.application.payment;
 
 import com.gd.reservationservices.common.exception.ErrorCode;
+import com.gd.reservationservices.application.payment.command.CreateCouponValue;
+import com.gd.reservationservices.application.payment.command.UpdateCouponValue;
+import com.gd.reservationservices.application.payment.dto.CreateCouponResult;
+import com.gd.reservationservices.application.payment.dto.SearchCouponResult;
 import com.gd.reservationservices.domain.payment.Coupon;
 import com.gd.reservationservices.domain.performance.Performance;
-import com.gd.reservationservices.infrastructure.payment.CouponRepository;
-import com.gd.reservationservices.infrastructure.performance.PerformanceRepository;
+import com.gd.reservationservices.domain.payment.repository.CouponRepository;
+import com.gd.reservationservices.domain.performance.repository.PerformanceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
