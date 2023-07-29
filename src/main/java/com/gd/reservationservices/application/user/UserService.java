@@ -2,9 +2,9 @@ package com.gd.reservationservices.application.user;
 
 import com.gd.reservationservices.application.user.command.CreateUser;
 import com.gd.reservationservices.application.user.dto.SearchUserResult;
-import com.gd.reservationservices.application.user.dto.UpdateUserResult;
 import com.gd.reservationservices.application.user.dto.UpdateUserCommend;
-import com.gd.reservationservices.application.user.exception.UserNotFoundException;
+import com.gd.reservationservices.application.user.dto.UpdateUserResult;
+import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.infrastructure.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class UserService {
     @Transactional
     public void joinBusinessUser(CreateUser createUser) {
         if (userRepository.exists(createUser.userId())) {
-            throw new IllegalArgumentException("이미 등록된 아이디 입니다.");
+            throw new IllegalArgumentException(ErrorCode.ALREADY_REGISTERED_USER.getMessage());
         }
 
         userRepository.save(createUser.toEntity());
@@ -28,7 +28,7 @@ public class UserService {
 
     public SearchUserResult searchBy(Long id) {
         User user = userRepository.findById(id)
-            .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.getMessage()));
 
         return new SearchUserResult(user);
     }
@@ -36,7 +36,7 @@ public class UserService {
     @Transactional
     public UpdateUserResult update(Long userId, UpdateUserCommend updateUserCommend) {
         User user = userRepository.findById(userId)
-            .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.getMessage()));
 
         user.updateInformation(
             updateUserCommend.userPw(),

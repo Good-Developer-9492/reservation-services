@@ -4,8 +4,7 @@ import com.gd.reservationservices.application.performance.dto.CreateReservationR
 import com.gd.reservationservices.application.performance.dto.CreateReservationValue;
 import com.gd.reservationservices.application.performance.dto.SearchReservationListResult;
 import com.gd.reservationservices.application.performance.dto.SearchReservationResult;
-import com.gd.reservationservices.application.performance.exception.*;
-import com.gd.reservationservices.application.user.exception.UserNotFoundException;
+import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.domain.performance.Seat;
@@ -33,18 +32,18 @@ public class ReservationService {
     @Transactional
     public CreateReservationResult create(Long performanceId, CreateReservationValue requestValue) {
         Performance performance = performanceRepository.findById(performanceId)
-            .orElseThrow(IllegalArgumentException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.getMessage()));
 
         Seat seat = seatRepository.findByPerformanceIdAndLocationAndNumber(
             performanceId, requestValue.seatLocation(), requestValue.seatNumber()
-        ).orElseThrow(SeatNotFoundException::new);
+        ).orElseThrow(() -> new IllegalArgumentException(ErrorCode.SEAT_NOT_FOUND.getMessage()));
 
         if (seat.isReserved()) {
-            throw new AlreadyReservedSeatException();
+            throw new IllegalArgumentException(ErrorCode.ALREADY_RESERVED_SEAT.getMessage());
         }
 
         User user = userRepository.findById(requestValue.userId())
-            .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.USER_NOT_FOUND.getMessage()));
 
         Reservation reservation = reservationRepository.save(
             new Reservation(
@@ -62,7 +61,7 @@ public class ReservationService {
 
     public SearchReservationListResult searchAllBy(Long performanceId, Pageable pageable) {
         Performance performance = performanceRepository.findById(performanceId)
-            .orElseThrow(PerformanceNotFoundException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.getMessage()));
 
         return new SearchReservationListResult(
             reservationRepository.findAllByPerformance(performance, pageable)
@@ -71,10 +70,10 @@ public class ReservationService {
 
     public SearchReservationResult searchBy(Long performanceId, Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId)
-            .orElseThrow(ReservationNotFoundException::new);
+            .orElseThrow(() -> new IllegalArgumentException(ErrorCode.RESERVATION_NOT_FOUND.getMessage()));
 
         if (!performanceId.equals(reservation.getPerformance().getId())) {
-            throw new ReservationNotMatchedException();
+            throw new IllegalArgumentException(ErrorCode.RESERVATION_NOT_MATCHED_PERFORMANCE.getMessage());
         }
 
         return new SearchReservationResult(reservation);
