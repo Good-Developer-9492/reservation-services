@@ -1,12 +1,12 @@
-package com.gd.reservationservices.presentation.payment.request;
+package com.gd.reservationservices.presentation.payment.request.coupon;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gd.reservationservices.application.payment.command.UpdateCouponValue;
+import com.gd.reservationservices.application.payment.command.CreateCouponValue;
 import com.gd.reservationservices.domain.payment.Coupon;
 
 import java.time.LocalDateTime;
 
-public record UpdateCouponRequest(
+public record CreateCouponRequest(
         Long performanceId,
         Coupon.Type type,
         Integer value,
@@ -14,13 +14,14 @@ public record UpdateCouponRequest(
         LocalDateTime expiredAt,
         Integer amount) {
 
-    public UpdateCouponValue toValue(Long id) {
-        return new UpdateCouponValue(
-                id,
+    public CreateCouponValue toValue() {
+        return new CreateCouponValue(
                 this.performanceId(),
                 this.type,
                 this.value(),
-                this.expiredAt()
+                this.expiredAt(),
+                this.amount()
         );
     }
+
 }

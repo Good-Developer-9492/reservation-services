@@ -38,4 +38,8 @@ public class Reservation extends BaseTimeEntity {
         this.seat = seat;
         this.reservedAt = reservedAt;
     }
+
+    public void validUser(Long userId) {
+        if(!user.getId().equals(userId)) throw new RuntimeException();
+    }
 }
