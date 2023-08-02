@@ -2,7 +2,9 @@ package com.gd.reservationservices.domain.performance;
 
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Seat extends BaseTimeEntity {
     @Id
