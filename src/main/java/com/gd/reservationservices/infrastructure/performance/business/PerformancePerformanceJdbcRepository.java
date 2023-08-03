@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,21 +20,15 @@ public class PerformancePerformanceJdbcRepository implements com.gd.reservations
     @Override
     public void saveAll(List<Seat> seats) {
         String sql = "INSERT INTO reservation.seat (created_at, updated_at, is_reserved, location, number, performance_id)"
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "VALUES (now(), now(), ?, ?, ?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 Seat seat = seats.get(i);
-
-                Date utilDate = new Date();
-                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-                ps.setDate(1, sqlDate);
-                ps.setDate(2, sqlDate);
-                ps.setBoolean(3, seat.getIsReserved());
-                ps.setString(4, seat.getLocation());
-                ps.setInt(5, seat.getNumber());
-                ps.setLong(6, seat.getPerformanceId());
+                ps.setBoolean(1, seat.getIsReserved());
+                ps.setString(2, seat.getLocation());
+                ps.setInt(3, seat.getNumber());
+                ps.setLong(4, seat.getPerformanceId());
 
             }
 

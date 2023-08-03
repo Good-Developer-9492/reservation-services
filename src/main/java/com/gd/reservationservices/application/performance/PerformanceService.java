@@ -45,7 +45,7 @@ public class PerformanceService {
                     .collect(Collectors.toList())
             );
 
-        if (performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
+        if (!performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
             throw new IllegalArgumentException(ErrorCode.PERFORMANCE_EXCEED_MAX_SEAT_ON_PLACE.name());
         }
 
