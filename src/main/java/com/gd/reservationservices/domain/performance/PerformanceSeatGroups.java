@@ -11,7 +11,7 @@ public class PerformanceSeatGroups {
             .mapToInt(s -> s.seatCount)
             .sum();
 
-        return maxSeats < sumSeats;
+        return maxSeats >= sumSeats;
     }
 
     public List<Seat> getSeats(Long performanceId) {
