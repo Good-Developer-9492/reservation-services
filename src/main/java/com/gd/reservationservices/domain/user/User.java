@@ -4,7 +4,7 @@ import com.gd.reservationservices.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-@Entity
+@Entity(name = "Users")
 @Getter
 public class User extends BaseTimeEntity {
     @Id
