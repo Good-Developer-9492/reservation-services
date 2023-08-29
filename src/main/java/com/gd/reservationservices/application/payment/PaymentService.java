@@ -1,58 +1,62 @@
 package com.gd.reservationservices.application.payment;
 
 import com.gd.reservationservices.application.payment.command.CreatePaymentValue;
-import com.gd.reservationservices.application.payment.dto.SearchPaymentResult;
 import com.gd.reservationservices.domain.payment.Coupon;
 import com.gd.reservationservices.domain.payment.Payment;
 import com.gd.reservationservices.domain.payment.repository.CouponRepository;
 import com.gd.reservationservices.domain.payment.repository.PaymentRepository;
-import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
 import com.gd.reservationservices.domain.performance.repository.PerformanceRepository;
 import com.gd.reservationservices.domain.performance.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
-    private final PaymentRepository repository;
+    private final PaymentRepository paymentRepository;
     private final ReservationRepository reservationRepository;
     private final PerformanceRepository performanceRepository;
     private final CouponRepository couponRepository;
     private final OutPaymentService outPaymentService;
-    public SearchPaymentResult search(Long id) {
-        repository.findById(id);
-    }
+//    public SearchPaymentResult search(Long id) {
+//        repository.findById(id);
+//    }
+//
+//    public List<SearchPaymentResult> searchAll(Long userId) {
+//    }
 
-    public List<SearchPaymentResult> searchAll(Long userId) {
-    }
+    public PayResult pay(CreatePaymentValue createPayment) {
+        Reservation reservation = reservationRepository
+                .findById(createPayment.reservationId())
+                .orElseThrow();
 
-    public void pay(CreatePaymentValue value) {
-        Reservation reservation = reservationRepository.findById(value.reservationId()).orElseThrow();
-        reservation.validUser(value.userID());
+        reservation.validUser(createPayment.userID());
 
-        //낸 값과 퍼포먼스의 값이 다르면 return
+        Coupon coupon = couponRepository.findById(createPayment.couponId())
+                .orElseThrow();
 
-        Coupon coupon = null;
-        if(value.couponId() != null) {
-            coupon = couponRepository.findById(value.couponId())
-                    .orElseThrow();
-            int discountPrice = coupon.calDiscountPrice()
-            //할인율을 적용한다
-        }
+        coupon.valid();
 
-        //금액 비교
+        Integer discountPrice = new DiscountPriceCalculator(coupon, createPayment.price()).call();
 
-        //payevent
+        Payment payment = new Payment(
+                reservation.getUser(),
+                reservation.getPerformance().getId(),
+                coupon.getId(),
+                createPayment.price(),
+                discountPrice
+        );
+
+        payment.validPrice(reservation.getPerformance().getPrice());
+
         outPaymentService.call();
 
+        paymentRepository.save(payment);
+
+        coupon.use();
+
+        return new PayResult(payment);
     }
 
-    public void refund(Long id, CreatePaymentValue value) {
-        //쿠폰 환불
-        //좌석 되돌리기
-    }
 }

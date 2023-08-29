@@ -4,5 +4,5 @@ public record CreatePaymentValue(
         Long userID,
         Long reservationId,
         Long couponId,
-        int price
+        Integer price
 ){}

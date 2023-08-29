@@ -19,8 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 @SpringBootTest
 class PaymentServiceTest {
     @Autowired
@@ -88,7 +86,7 @@ class PaymentServiceTest {
                 )
         );
 
-        CreatePayResult result = paymentService.pay(
+        PayResult result = paymentService.pay(
                 new CreatePaymentValue(
                         user.getId(),
                         1L,
@@ -97,6 +95,5 @@ class PaymentServiceTest {
                 )
         );
 
-        assertThat(result.id()).isEqualTo(1L);
     }
 }

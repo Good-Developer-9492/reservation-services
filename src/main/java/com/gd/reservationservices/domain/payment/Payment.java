@@ -1,29 +1,26 @@
 package com.gd.reservationservices.domain.payment;
 
 import com.gd.reservationservices.domain.BaseTimeEntity;
-import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class Payment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "performance_id", nullable = false)
-    private Performance performance;
+    private Long performanceId;
 
-    @OneToOne
-    @JoinColumn(name = "coupon_id")
-    private Coupon coupon;
+    private Long couponId;
 
     @Column(nullable = false)
     private Integer price;
@@ -37,17 +34,28 @@ public class Payment extends BaseTimeEntity {
     protected Payment() {
     }
 
-    public Payment(User user,
-                   Performance performance,
-                   Coupon coupon,
-                   Integer price,
-                   Integer discountPrice,
-                   LocalDateTime canceledAt) {
+    public Payment(User user, Long performanceId, Long couponId, Integer price, Integer discountPrice) {
+        this(null, user, performanceId, couponId, price, discountPrice, null);
+    }
+
+    private Payment(Long id,
+                    User user,
+                    Long performanceId,
+                    Long couponId,
+                    Integer price,
+                    Integer discountPrice,
+                    LocalDateTime canceledAt) {
+        this.id = id;
         this.user = user;
-        this.performance = performance;
-        this.coupon = coupon;
+        this.performanceId = performanceId;
+        this.couponId = couponId;
         this.price = price;
         this.discountPrice = discountPrice;
         this.canceledAt = canceledAt;
     }
+
+    public void validPrice(Integer performancePrice) {
+        if(this.price < performancePrice - discountPrice) throw new RuntimeException();
+    }
+
 }

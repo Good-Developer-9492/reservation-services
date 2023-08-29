@@ -5,10 +5,11 @@ import com.gd.reservationservices.application.payment.command.CreatePaymentValue
 public record RefundPaymentRequest(
         Long reservationId,
         Long couponId,
-        int price
+        Integer price
 ) {
     public CreatePaymentValue toValue() {
     return new CreatePaymentValue(
+            null,
             reservationId,
             couponId,
             price

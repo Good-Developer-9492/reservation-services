@@ -16,7 +16,7 @@ public record SearchUserResult(
         this(
             user.getUserId(),
             user.getName(),
-            user.getAgw(),
+            user.getAge(),
             user.getEmail(),
             user.getPhone(),
             Role.valueOf(user.getRole().toString())

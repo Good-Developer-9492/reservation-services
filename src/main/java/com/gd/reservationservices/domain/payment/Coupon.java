@@ -35,17 +35,18 @@ public class Coupon extends BaseTimeEntity {
     @Column(nullable = false)
     private LocalDateTime expiredAt;
 
+    public void valid() {
+        if (this.usedAt != null ||
+                this.expiredAt.isAfter(LocalDateTime.now())) {
+            throw new RuntimeException();
+        }
+    }
 
     public Coupon(Performance performance,
                   Type type,
                   Integer value,
                   LocalDateTime expiredAt) {
         this(null, performance, UUID.randomUUID().toString(), type, value, null, expiredAt);
-    }
-
-    public enum Type {
-        PERCENT,
-        WON
     }
 
     public Coupon delete() {
@@ -90,5 +91,10 @@ public class Coupon extends BaseTimeEntity {
         this.value = value;
         this.usedAt = usedAt;
         this.expiredAt = expiredAt;
+    }
+
+    public enum Type {
+        PERCENT,
+        WON
     }
 }

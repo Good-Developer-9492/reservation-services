@@ -40,6 +40,6 @@ public class Reservation extends BaseTimeEntity {
     }
 
     public void validUser(Long userId) {
-        if(!user.getId().equals(userId)) throw new RuntimeException();
+        if (!user.getId().equals(userId)) throw new RuntimeException();
     }
 }
