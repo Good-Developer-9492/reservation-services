@@ -12,10 +12,10 @@ public class DiscountPriceCalculator {
         }
 
         if (this.coupon.getType().equals(Coupon.Type.PERCENT)) {
-            return (int) (this.price * (this.coupon.getValue() * 0.01));
+            return (int) (this.price * (this.coupon.getDiscountValue() * 0.01));
         }
 
-        return this.coupon.getValue();
+        return this.coupon.getDiscountValue();
     }
 
     public DiscountPriceCalculator(Coupon coupon, Integer price) {

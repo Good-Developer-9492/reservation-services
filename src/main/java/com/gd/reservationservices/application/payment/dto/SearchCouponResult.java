@@ -17,9 +17,9 @@ public record SearchCouponResult(
         this(
                 coupon.getId(),
                 coupon.getPerformance().getTitle(),
-                coupon.getCode(),
+                coupon.getSerialNumber(),
                 coupon.getType().toString(),
-                coupon.getValue(),
+                coupon.getDiscountValue(),
                 coupon.getUsedAt(),
                 coupon.getExpiredAt()
         );

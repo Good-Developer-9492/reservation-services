@@ -16,9 +16,9 @@ public record CreateCouponResult(
         this(
                 coupon.getId(),
                 coupon.getPerformance().getTitle(),
-                coupon.getCode(),
+                coupon.getSerialNumber(),
                 coupon.getType().toString(),
-                coupon.getValue(),
+                coupon.getDiscountValue(),
                 coupon.getExpiredAt()
         );
     }

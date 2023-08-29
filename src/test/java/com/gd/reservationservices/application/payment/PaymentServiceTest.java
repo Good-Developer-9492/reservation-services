@@ -1,6 +1,8 @@
 package com.gd.reservationservices.application.payment;
 
 import com.gd.reservationservices.application.payment.command.CreatePaymentValue;
+import com.gd.reservationservices.domain.payment.Coupon;
+import com.gd.reservationservices.domain.payment.repository.CouponRepository;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Place;
 import com.gd.reservationservices.domain.performance.Reservation;
@@ -22,17 +24,19 @@ import java.time.LocalDateTime;
 @SpringBootTest
 class PaymentServiceTest {
     @Autowired
-    PaymentService paymentService;
+    private PaymentService paymentService;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    ReservationRepository reservationRepository;
+    private ReservationRepository reservationRepository;
     @Autowired
-    PerformanceRepository performanceRepository;
+    private PerformanceRepository performanceRepository;
     @Autowired
-    PlaceRepository placeRepository;
+    private PlaceRepository placeRepository;
     @Autowired
-    SeatRepository seatRepository;
+    private SeatRepository seatRepository;
+    @Autowired
+    private CouponRepository couponRepository;
 
     @DisplayName("쿠폰없이 결제")
     @Test
@@ -86,13 +90,23 @@ class PaymentServiceTest {
                 )
         );
 
+        Coupon coupon = couponRepository.save(
+            new Coupon(
+                performance,
+                Coupon.Type.PERCENT,
+                10,
+                LocalDateTime.of(2023, 8, 19, 23, 59, 59)
+            ));
+        Long couponId = coupon.getId();
+
+
         PayResult result = paymentService.pay(
-                new CreatePaymentValue(
-                        user.getId(),
-                        1L,
-                        null,
-                        50000
-                )
+            new CreatePaymentValue(
+                user.getId(),
+                1L,
+                couponId,
+                50000
+            )
         );
 
     }
