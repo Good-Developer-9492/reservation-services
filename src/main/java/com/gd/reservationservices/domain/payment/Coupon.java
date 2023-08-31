@@ -83,7 +83,7 @@ public class Coupon extends BaseTimeEntity {
     protected Coupon() {
     }
 
-    public Coupon(Long id, Performance performance, String serialNumber, Type type, Integer discountValue, LocalDateTime usedAt, LocalDateTime expiredAt) {
+    private Coupon(Long id, Performance performance, String serialNumber, Type type, Integer discountValue, LocalDateTime usedAt, LocalDateTime expiredAt) {
         this.id = id;
         this.performance = performance;
         this.serialNumber = serialNumber;
