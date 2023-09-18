@@ -14,7 +14,7 @@ public class PerformanceSeatGroups {
         return maxSeats >= sumSeats;
     }
 
-    public List<Seat> getSeats(Performance performance) {
+    public List<Seat> getSeats(Long performanceId) {
         List<Seat> seats = new ArrayList<>();
 
         for (SeatInfo seatInfo : this.performanceSeats) {
@@ -23,7 +23,7 @@ public class PerformanceSeatGroups {
 
             for (int j = 1; j <= size; j++) {
                 seats.add(
-                    new Seat(performance.getId(), location, j)
+                    new Seat(performanceId, location, j)
                 );
             }
         }

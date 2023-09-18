@@ -8,9 +8,9 @@ import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.PerformanceSeatGroups;
 import com.gd.reservationservices.domain.performance.Place;
+import com.gd.reservationservices.domain.performance.repository.PerformanceJdbcRepository;
 import com.gd.reservationservices.domain.performance.repository.PerformanceRepository;
 import com.gd.reservationservices.domain.performance.repository.PlaceRepository;
-import com.gd.reservationservices.domain.performance.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class PerformanceService {
     private final PerformanceRepository performanceRepository;
     private final PlaceRepository placeRepository;
-    private final SeatRepository seatRepository;
+    private final PerformanceJdbcRepository performanceJdbcRepository;
 
     @Transactional
     public CreatePerformanceResult create(CreatePerformanceValue createPerformanceValue) {
@@ -45,15 +45,15 @@ public class PerformanceService {
                     .collect(Collectors.toList())
             );
 
-        if (performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
+        if (!performanceSeats.seatRegistrationAvailable(place.getMaxSeat())) {
             throw new IllegalArgumentException(ErrorCode.PERFORMANCE_EXCEED_MAX_SEAT_ON_PLACE.name());
         }
 
         Performance newPerformance = createPerformanceValue.toEntity(place);
         performanceRepository.save(newPerformance);
 
-        seatRepository.saveAll(
-            performanceSeats.getSeats(newPerformance)
+        performanceJdbcRepository.saveAll(
+            performanceSeats.getSeats(newPerformance.getId())
         );
 
         return new CreatePerformanceResult(
