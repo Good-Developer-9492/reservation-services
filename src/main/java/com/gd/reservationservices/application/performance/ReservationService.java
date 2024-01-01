@@ -4,6 +4,7 @@ import com.gd.reservationservices.application.performance.dto.CreateReservationR
 import com.gd.reservationservices.application.performance.dto.CreateReservationValue;
 import com.gd.reservationservices.application.performance.dto.SearchReservationListResult;
 import com.gd.reservationservices.application.performance.dto.SearchReservationResult;
+import com.gd.reservationservices.common.aop.DistributedLock;
 import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.Reservation;
@@ -22,14 +23,13 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ReservationService {
     private final PerformanceRepository performanceRepository;
     private final ReservationRepository reservationRepository;
     private final SeatRepository seatRepository;
     private final UserRepository userRepository;
 
-    @Transactional
+    @DistributedLock(leaseTime = 3000)
     public CreateReservationResult create(Long performanceId, CreateReservationValue requestValue) {
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
@@ -59,6 +59,7 @@ public class ReservationService {
         return new CreateReservationResult(reservation);
     }
 
+    @Transactional(readOnly = true)
     public SearchReservationListResult searchAllBy(Long performanceId, Pageable pageable) {
         Performance performance = performanceRepository.findById(performanceId)
             .orElseThrow(() -> new IllegalArgumentException(ErrorCode.PERFORMANCE_NOT_FOUND.name()));
@@ -68,6 +69,7 @@ public class ReservationService {
         );
     }
 
+    @Transactional(readOnly = true)
     public SearchReservationResult searchBy(Long performanceId, Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId)
             .orElseThrow(() -> new IllegalArgumentException(ErrorCode.RESERVATION_NOT_FOUND.name()));
