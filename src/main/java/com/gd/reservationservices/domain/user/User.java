@@ -4,7 +4,7 @@ import com.gd.reservationservices.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-@Entity
+@Entity(name = "USERS")
 @Getter
 public class User extends BaseTimeEntity {
     @Id
@@ -21,7 +21,7 @@ public class User extends BaseTimeEntity {
     private String name;
 
     @Column(nullable = false)
-    private int agw;
+    private int age;
 
     @Column(nullable = false)
     private String email;
@@ -39,14 +39,14 @@ public class User extends BaseTimeEntity {
     public User(String userId,
                 String userPw,
                 String name,
-                int agw,
+                int age,
                 String email,
                 String phone,
                 Role role) {
         this.userId = userId;
         this.userPw = userPw;
         this.name = name;
-        this.agw = agw;
+        this.age = age;
         this.email = email;
         this.phone = phone;
         this.role = role;
@@ -55,6 +55,6 @@ public class User extends BaseTimeEntity {
     public void updateInformation(String userPw, String name, int age) {
         this.userPw = userPw;
         this.name = name;
-        this.agw = age;
+        this.age = age;
     }
 }

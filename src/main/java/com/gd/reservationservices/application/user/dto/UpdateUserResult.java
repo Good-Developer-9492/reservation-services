@@ -15,7 +15,7 @@ public record UpdateUserResult(
         this(
             user.getUserId(),
             user.getName(),
-            user.getAgw(),
+            user.getAge(),
             user.getEmail(),
             user.getPhone(),
             user.getRole()

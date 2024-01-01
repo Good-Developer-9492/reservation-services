@@ -1,7 +1,7 @@
 package com.gd.reservationservices.presentation.payment.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gd.reservationservices.application.payment.command.UpdateCouponValue;
+import com.gd.reservationservices.application.payment.dto.UpdateCouponValue;
 import com.gd.reservationservices.domain.payment.Coupon;
 
 import java.time.LocalDateTime;

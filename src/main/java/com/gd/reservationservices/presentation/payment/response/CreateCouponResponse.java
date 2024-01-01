@@ -16,9 +16,9 @@ public record CreateCouponResponse(
         this(
                 result.id(),
                 result.performanceTitle(),
-                result.code(),
+                result.serialNumber(),
                 result.type(),
-                result.value(),
+                result.discountValue(),
                 result.expiredAt()
         );
     }

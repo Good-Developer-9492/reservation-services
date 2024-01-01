@@ -19,7 +19,7 @@ public class PerformancePerformanceJdbcRepository implements com.gd.reservations
 
     @Override
     public void saveAll(List<Seat> seats) {
-        String sql = "INSERT INTO reservation.seat (created_at, updated_at, is_reserved, location, number, performance_id)"
+        String sql = "INSERT INTO seat (created_at, updated_at, is_reserved, location, number, performance_id)"
                 + "VALUES (now(), now(), ?, ?, ?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
