@@ -35,7 +35,7 @@ public class DistributedLockAop {
         String key = performanceId + requestValue.seatLocation() + requestValue.seatNumber();
 
         boolean lockAvailable =
-                lockRepository.lock(key, "lock", distributedLock.leaseTime());
+                lockRepository.lock(key, "lock", distributedLock.leaseTime(), distributedLock.timeUnit());
 
         if (!lockAvailable) {
             throw new IllegalArgumentException(ErrorCode.ALREADY_RESERVED_SEAT.name());

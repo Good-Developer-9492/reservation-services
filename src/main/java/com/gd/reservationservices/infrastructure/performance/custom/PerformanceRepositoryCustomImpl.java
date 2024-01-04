@@ -20,25 +20,25 @@ public class PerformanceRepositoryCustomImpl implements PerformanceRepositoryCus
     @Override
     public boolean exists(Long placeId, LocalDateTime startAt, LocalDateTime endAt) {
         Integer fetchOne = queryFactory
-            .selectOne()
-            .from(performance)
-            .where(
-                performance.place.id.eq(placeId),
-                performance.startAt.between(startAt, endAt)
-                    .or(performance.endAt.between(startAt, endAt))
-            )
-            .fetchFirst();
+                .selectOne()
+                .from(performance)
+                .where(
+                        performance.place.id.eq(placeId),
+                        performance.startAt.between(startAt, endAt)
+                                .or(performance.endAt.between(startAt, endAt))
+                )
+                .fetchFirst();
         return fetchOne != null;
     }
 
     @Override
     public Optional<Performance> findPerformanceAndPlace(Long id) {
         return Optional.ofNullable(queryFactory
-            .selectFrom(performance)
-            .join(performance.place, place).fetchJoin()
-            .where(
-                performance.id.eq(id)
-            )
-            .fetchOne());
+                .selectFrom(performance)
+                .join(performance.place, place).fetchJoin()
+                .where(
+                        performance.id.eq(id)
+                )
+                .fetchOne());
     }
 }

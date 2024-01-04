@@ -1,12 +1,13 @@
 package com.gd.reservationservices.presentation.user;
 
 import com.gd.reservationservices.application.user.UserService;
+import com.gd.reservationservices.application.user.dto.SavedUserValue;
 import com.gd.reservationservices.application.user.dto.SearchUserResult;
 import com.gd.reservationservices.application.user.dto.UpdateUserResult;
-import com.gd.reservationservices.common.response.EmptyResponse;
 import com.gd.reservationservices.common.response.SingleResponse;
 import com.gd.reservationservices.presentation.user.reqeust.UpdateUserRequest;
 import com.gd.reservationservices.presentation.user.request.CreateUserRequest;
+import com.gd.reservationservices.presentation.user.response.SavedUserResponse;
 import com.gd.reservationservices.presentation.user.response.SearchUserResponse;
 import com.gd.reservationservices.presentation.user.response.UpdateUserResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping()
-    public EmptyResponse join(@RequestBody CreateUserRequest createUserRequest) {
-        userService.joinBusinessUser(createUserRequest.toValue());
+    public SingleResponse<SavedUserResponse> join(@RequestBody CreateUserRequest createUserRequest) {
+        SavedUserValue savedUser = userService.join(createUserRequest.toValue());
+        SavedUserResponse savedUserResponse = new SavedUserResponse(savedUser);
 
-        return new EmptyResponse.Ok<>();
+        return new SingleResponse.Ok<>(savedUserResponse);
     }
 
     @GetMapping("/{id}")
@@ -40,7 +42,7 @@ public class UserController {
         UpdateUserResult updateUserResult = userService.update(id, updateUserRequest.toValue());
 
         return new SingleResponse.Ok<>(
-            new UpdateUserResponse(updateUserResult)
+                new UpdateUserResponse(updateUserResult)
         );
     }
 }

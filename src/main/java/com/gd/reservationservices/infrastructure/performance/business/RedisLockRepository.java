@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Repository
@@ -13,9 +14,9 @@ public class RedisLockRepository implements LockRepository {
     private final RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public Boolean lock(String key, String value, Long leaseTime) {
+    public Boolean lock(String key, String value, Long leaseTime, TimeUnit timeUnit) {
         return redisTemplate.opsForValue()
-                .setIfAbsent(key, value, Duration.ofMillis(leaseTime));
+                .setIfAbsent(key, value, leaseTime, timeUnit);
     }
 
     @Override

@@ -7,18 +7,18 @@ import java.time.LocalDateTime;
 public record CreateCouponResult(
         Long id,
         String performanceTitle,
-        String code,
+        String serialNumber,
         String type,
-        Integer value,
+        Integer discountValue,
         LocalDateTime expiredAt
 ) {
     public CreateCouponResult(Coupon coupon) {
         this(
                 coupon.getId(),
                 coupon.getPerformance().getTitle(),
-                coupon.getCode(),
+                coupon.getSerialNumber(),
                 coupon.getType().toString(),
-                coupon.getValue(),
+                coupon.getDiscountValue(),
                 coupon.getExpiredAt()
         );
     }
