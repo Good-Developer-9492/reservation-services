@@ -3,7 +3,9 @@ package com.gd.reservationservices.application.performance;
 import com.gd.reservationservices.application.performance.dto.CreatePerformanceResult;
 import com.gd.reservationservices.application.performance.dto.CreatePerformanceValue;
 import com.gd.reservationservices.application.performance.dto.PerformancePlace;
+import com.gd.reservationservices.application.performance.dto.SearchAllPerformanceResult;
 import com.gd.reservationservices.application.performance.dto.SearchPerformanceResult;
+import com.gd.reservationservices.application.performance.dto.SearchPerformancesValue;
 import com.gd.reservationservices.common.exception.ErrorCode;
 import com.gd.reservationservices.domain.performance.Performance;
 import com.gd.reservationservices.domain.performance.PerformanceSeatGroups;
@@ -12,9 +14,13 @@ import com.gd.reservationservices.domain.performance.repository.PerformanceJdbcR
 import com.gd.reservationservices.domain.performance.repository.PerformanceRepository;
 import com.gd.reservationservices.domain.performance.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,5 +76,12 @@ public class PerformanceService {
             performance,
             new PerformancePlace(performance.getPlace())
         );
+    }
+
+    @Transactional(readOnly = true)
+    public SearchAllPerformanceResult searchAllBy(SearchPerformancesValue request, Pageable pageable) {
+        Page<Performance> allWithPlace = performanceRepository.findAllWithPlace(request.toValue(), pageable);
+
+        return new SearchAllPerformanceResult(allWithPlace);
     }
 }
