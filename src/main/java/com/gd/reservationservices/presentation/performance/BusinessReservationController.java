@@ -7,11 +7,13 @@ import com.gd.reservationservices.common.request.PagingRequest;
 import com.gd.reservationservices.common.response.ListResponse;
 import com.gd.reservationservices.common.response.Paging;
 import com.gd.reservationservices.common.response.SingleResponse;
+import com.gd.reservationservices.domain.performance.Seat;
 import com.gd.reservationservices.presentation.performance.response.SearchReservationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,5 +50,12 @@ public class BusinessReservationController {
         return new SingleResponse.Ok<>(
             new SearchReservationResponse(reservation)
         );
+    }
+
+    @GetMapping("/{performanceId}/seats")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Seat> searchAllSeatBy(@PathVariable Long performanceId, PagingRequest pagingRequest) {
+        List<Seat> seats = reservationService.searchAllSeatBy(performanceId, pagingRequest.toPageable());
+        return seats;
     }
 }

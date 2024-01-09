@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -79,5 +80,10 @@ public class ReservationService {
         }
 
         return new SearchReservationResult(reservation);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Seat> searchAllSeatBy(Long performanceId, Pageable pageable) {
+        return seatRepository.findByPerformanceId(performanceId, pageable);
     }
 }
