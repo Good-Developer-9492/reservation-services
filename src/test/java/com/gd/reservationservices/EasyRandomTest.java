@@ -1,6 +1,8 @@
 package com.gd.reservationservices;
 
 import com.gd.reservationservices.domain.BaseTimeEntity;
+import com.gd.reservationservices.domain.payment.Point;
+import com.gd.reservationservices.domain.performance.repository.PointRepository;
 import com.gd.reservationservices.domain.user.Role;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.domain.user.repository.UserRepository;
@@ -26,18 +28,77 @@ import static org.jeasy.random.FieldPredicates.ofType;
 public class EasyRandomTest extends IntegrationTestSupport {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PointRepository pointRepository;
+
+    @Test
+    void pointTestData() {
+        List<Point> points = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Point point = createPoint(i);
+            if (point.getValue() < 0) {
+                point.setType(Point.Type.USED);
+            }
+
+            if (point.getValue() == 0) {
+                continue;
+            }
+
+            points.add(point);
+        }
+
+        pointRepository.saveAll(points);
+    }
 
     @Test
     void test1() {
         List<User> users = new ArrayList<>();
-
         for (int i = 0; i < 10000; i++) {
-            users.add(create(i));
+            users.add(createUser(i));
         }
         userRepository.saveAll(users);
     }
 
-    public User create(int seed) {
+//docker run --name redis -d -p 6379:6379 redis
+    public Point createPoint(int seed) {
+        Predicate<Field> id = named("id")
+                .and(ofType(Long.class))
+                .and(inClass(Point.class));
+
+        Predicate<Field> createdAt = named("createdAt")
+                .and(ofType(LocalDateTime.class))
+                .and(inClass(BaseTimeEntity.class));
+
+        Predicate<Field> updatedAt = named("updatedAt")
+                .and(ofType(LocalDateTime.class))
+                .and(inClass(BaseTimeEntity.class));
+
+        Predicate<Field> userId = named("userId")
+                .and(ofType(Long.class))
+                .and(inClass(Point.class));
+
+        Predicate<Field> type = named("type")
+                .and(ofType(Point.Type.class))
+                .and(inClass(Point.class));
+
+        Predicate<Field> value = named("value")
+                .and(ofType(Long.class))
+                .and(inClass(Point.class));
+
+        EasyRandomParameters parameters = new EasyRandomParameters();
+        parameters.seed(seed)
+                .excludeField(id)
+                .excludeField(createdAt)
+                .excludeField(updatedAt)
+                .randomize(userId, () -> new Random().nextLong(1, 1000))
+                .randomize(type, () -> Point.Type.ADD)
+                .randomize(value, () -> 5000L);
+//                .randomize(value, () -> new Random().nextLong(-100, 100));
+
+        return new EasyRandom(parameters).nextObject(Point.class);
+    }
+
+    public User createUser(int seed) {
         Predicate<Field> id = named("id")
                 .and(ofType(Long.class))
                 .and(inClass(User.class));
