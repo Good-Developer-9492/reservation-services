@@ -1,57 +1,125 @@
 package com.gd.reservationservices;
 
+import com.gd.reservationservices.application.payment.PointService;
 import com.gd.reservationservices.domain.BaseTimeEntity;
 import com.gd.reservationservices.domain.payment.Point;
-import com.gd.reservationservices.domain.performance.repository.PointRepository;
+import com.gd.reservationservices.domain.payment.repository.PointRepository;
 import com.gd.reservationservices.domain.user.Role;
 import com.gd.reservationservices.domain.user.User;
 import com.gd.reservationservices.domain.user.repository.UserRepository;
+import com.gd.reservationservices.infrastructure.payment.custom.dto.PointSum;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 import org.jeasy.random.api.Randomizer;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 
-import static org.jeasy.random.FieldPredicates.inClass;
-import static org.jeasy.random.FieldPredicates.named;
-import static org.jeasy.random.FieldPredicates.ofType;
+import static org.jeasy.random.FieldPredicates.*;
 
 public class EasyRandomTest extends IntegrationTestSupport {
     @Autowired
     UserRepository userRepository;
     @Autowired
     PointRepository pointRepository;
+    @Autowired
+    PointService pointService;
 
-    @Test
-    void pointTestData() {
-        List<Point> points = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Point point = createPoint(i);
-            if (point.getValue() < 0) {
-                point.setType(Point.Type.USED);
-            }
+//    @Test
+    void test() {
+        PointSum pointSum = pointRepository.findGroupByUserId(43310L)
+                .orElseThrow(() -> new IllegalArgumentException("NOtNOtNOt"));
 
-            if (point.getValue() == 0) {
-                continue;
-            }
+        System.out.println(pointSum);
 
-            points.add(point);
+    }
+
+//    @Test
+    void creatPoint() {
+        for (long id = 1; id <= 10000; id++) {
+            User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("NOT FOUND"));
+            Point point = new Point(user.getId(), Point.Type.ADD, 5000L);
+            pointRepository.save(point);
         }
-
-        pointRepository.saveAll(points);
     }
 
     @Test
-    void test1() {
+    void updatePoint() {
+
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("---------------------------------------------------");
+            System.out.println("---------------------------------------------------");
+            System.out.println("---------------------------------------------------");
+            System.out.println("---------------------------------------------------");
+            List<Point> points = new ArrayList<>();
+            for (long id = 1; id <= 10000; id++) {
+//                User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("NOT FOUND"));
+//                Optional<User> userO = userRepository.findById(id);
+//                if (userO.isEmpty()) {
+//                    continue;
+//                }
+//
+//                User user = userO.get();
+                long value = new Random().nextLong(-100, 500);
+
+                if (value < 0) {
+                    Point point = new Point(id, Point.Type.USED, value);
+                    points.add(point);
+//                    PointSum pointSum = pointRepository.findGroupByUserId(user.getId()).orElseThrow(() -> new IllegalArgumentException("NOT FOUND"));
+//                    if (pointSum.getPoint() > 100) {
+//                        Point point = new Point(user.getId(), Point.Type.USED, value);
+//                        points.add(point);
+//                    }
+                } else if (value > 0) {
+                    Point point = new Point(id, Point.Type.ADD, value);
+                    points.add(point);
+                }
+            }
+            pointRepository.saveAll(points);
+        }
+    }
+
+    //20002, 50001
+//    @Test
+    void pointTestData() {
+        for (int j = 0; j < 1; j++) {
+            List<Point> points = new ArrayList<>();
+            for (int i = 1; i <= 10000; i++) {
+                Point point = createPoint(i);
+                long id = i;
+                point.setUserId(id);
+                try {
+                    PointSum pointSum = pointRepository.findGroupByUserId(id)
+                            .orElseThrow(() -> new IllegalArgumentException("NOtNOtNOt"));
+
+                    if (pointSum.getPoint() < 0) {
+                        point.setValue(1000L);
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+
+                if (point.getValue() < 0) {
+                    point.setType(Point.Type.USED);
+                }
+
+                if (point.getValue() == 0) {
+                    continue;
+                }
+                points.add(point);
+            }
+            pointRepository.saveAll(points);
+        }
+
+    }
+
+//    @Test
+    void createUser() {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
             users.add(createUser(i));
@@ -59,7 +127,7 @@ public class EasyRandomTest extends IntegrationTestSupport {
         userRepository.saveAll(users);
     }
 
-//docker run --name redis -d -p 6379:6379 redis
+    //docker run --name redis -d -p 6379:6379 redis
     public Point createPoint(int seed) {
         Predicate<Field> id = named("id")
                 .and(ofType(Long.class))
@@ -90,10 +158,10 @@ public class EasyRandomTest extends IntegrationTestSupport {
                 .excludeField(id)
                 .excludeField(createdAt)
                 .excludeField(updatedAt)
-                .randomize(userId, () -> new Random().nextLong(1, 1000))
+                .randomize(userId, () -> new Random().nextLong(20002, 50001))
                 .randomize(type, () -> Point.Type.ADD)
-                .randomize(value, () -> 5000L);
-//                .randomize(value, () -> new Random().nextLong(-100, 100));
+//                .randomize(value, () -> 5000L);
+                .randomize(value, () -> new Random().nextLong(5, 100));
 
         return new EasyRandom(parameters).nextObject(Point.class);
     }
