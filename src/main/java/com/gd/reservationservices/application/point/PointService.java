@@ -3,7 +3,6 @@ package com.gd.reservationservices.application.point;
 import com.gd.reservationservices.application.point.value.UserPoints;
 import com.gd.reservationservices.domain.point.dto.SearchPointGroupBy;
 import com.gd.reservationservices.infrastructure.point.dto.SearchPointResult;
-import com.gd.reservationservices.domain.point.repository.PointRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ public class PointService {
 
         return new SearchPointResult(
             userPoint.getUserId(),
-//            userPoint.getAmount()
-                10L
+            userPoint.getAmount()
         );
     }
 
