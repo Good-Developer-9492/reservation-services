@@ -4,13 +4,12 @@ import com.gd.reservationservices.domain.point.dto.QSearchPointGroupBy;
 import com.gd.reservationservices.domain.point.dto.SearchPointGroupBy;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-import static com.gd.reservationservices.domain.point.QPoint.*;
+import static com.gd.reservationservices.infrastructure.point.QPointEntity.*;
 
-@Repository
+
 public class SearchPointCustomImpl implements PointRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
@@ -24,13 +23,13 @@ public class SearchPointCustomImpl implements PointRepositoryCustom {
             queryFactory
                 .select(
                     new QSearchPointGroupBy(
-                        point.userId,
-                        point.amount.sum().as("amount")
+                        pointEntity.userId,
+                        pointEntity.amount.sum().as("amount")
                     )
                 )
-                .from(point)
-                .where(point.userId.eq(id))
-                .groupBy(point.userId)
+                .from(pointEntity)
+                .where(pointEntity.userId.eq(id))
+                .groupBy(pointEntity.userId)
                 .fetchOne()
         );
     }
